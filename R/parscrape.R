@@ -1,5 +1,5 @@
 #' parallelize execution of RSelenium
-#' @param scrape_function a function with input x sending instructions to remDr (remote driver)/ scraping function to be parallelized
+#' @param scrape_fun a function with input x sending instructions to remDr (remote driver)/ scraping function to be parallelized
 #' @param scrape_input a data frame, list, or vector where each element is an input to be passed to scrape_function
 #' @param cores number of cores to run RSelenium instances on
 #' @param packages a character vector with package names of packages used in scrape_function
