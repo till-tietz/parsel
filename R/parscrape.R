@@ -6,10 +6,11 @@
 #' @param browser a character vector specifying the browser to be used
 #' @param ports vector of ports for RSelenium instances (if left at default NULL parscrape will randomly generate ports)
 #' @param chunk_size number of scrape_input elements to be processed per round of scrape_function (parscrape splits scrape_input into chunks and runs scrape_function in multiple rounds to avoid loosing data due to errors)
-#' @return output of scrape_function
+#' @param scrape_tries sets number of times parscrape will re-try to scrape a chunk when encountering an error
+#' @return list with output of scrape_fun in "scraped_results" and a vector of indices of scrape_input elements that could not be scraped in "not_scaped"
 #' @export
 
-parscrape <- function(scrape_fun, scrape_input, cores, packages, browser, ports = NULL, chunk_size = 10){
+parscrape <- function(scrape_fun, scrape_input, cores, packages, browser, ports = NULL, chunk_size = 10, scrape_tries = 2){
 
   if(is.null(ports)){
     ports <- sample(1000:9999, cores, replace = FALSE)
@@ -45,21 +46,43 @@ parscrape <- function(scrape_fun, scrape_input, cores, packages, browser, ports 
 
   result_list <- vector(mode = "list", length = length(chunks))
 
-  on.exit(close_rselenium())
-  on.exit(parallel::stopCluster(clust))
-
   for(i in c(1:length(result_list))){
     chunk_i <- chunks[[i]]
     input_i <- scrape_input[chunk_i]
+    n_tries <- 0
     while(TRUE){
       scrape_out <- try(parallel::parLapply(clust, input_i, scrape_fun), silent=TRUE)
-      if(!is(scrape_out, 'try-error')) break
+      n_tries <- n_tries + 1
+      if(!is(scrape_out, 'try-error')){
+        print(paste(paste("chunk", i, sep = " "), "scraped", sep = " "))
+        break
+      }
+      if(n_tries == scrape_tries){
+        warning(paste(paste("parsel encountered the following ERROR while trying to scrape chunk", i, sep = " "), ":", sep = ""),
+                scrape_out[1],
+                "check under not_scraped of this function's output for the indices of elements in scrape_input that could not be
+                scraped and may have caused the error")
+
+        scrape_out <- "RSelenium ERROR"
+        break
+      }
     }
     result_list[[i]] <- scrape_out
   }
 
-  results <- unlist(result_list, recursive = FALSE)
-  return(results)
+  if("RSelenium ERROR" %in% result_list){
+    unscraped <- unlist(chunks[which(result_list == "RSelenium ERROR")])
+    results <- result_list[-which(result_list == "RSelenium ERROR")]
+  } else {
+    unscraped <- NULL
+    results <- result_list
+  }
+
+  results <- unlist(results, recursive = FALSE)
+  return(list("scraped_results" = results, "not_scraped" = unscraped))
+
+  close_rselenium()
+  parallel::stopCluster(clust)
 }
 
 
