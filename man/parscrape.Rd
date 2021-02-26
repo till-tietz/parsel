@@ -11,7 +11,8 @@ parscrape(
   packages,
   browser,
   ports = NULL,
-  chunk_size = 10
+  chunk_size = 10,
+  scrape_tries = 2
 )
 }
 \arguments{
@@ -28,9 +29,11 @@ parscrape(
 \item{ports}{vector of ports for RSelenium instances (if left at default NULL parscrape will randomly generate ports)}
 
 \item{chunk_size}{number of scrape_input elements to be processed per round of scrape_function (parscrape splits scrape_input into chunks and runs scrape_function in multiple rounds to avoid loosing data due to errors)}
+
+\item{scrape_tries}{sets number of times parscrape will re-try to scrape a chunk when encountering an error}
 }
 \value{
-output of scrape_function
+list with output of scrape_fun in "scraped_results" and a vector of indices of scrape_input elements that could not be scraped in "not_scaped"
 }
 \description{
 parallelize execution of RSelenium
