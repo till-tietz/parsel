@@ -13,3 +13,7 @@ Imports:
     parallel (>= 3.6.2),
     RSelenium (>= 1.7.7)
 RoxygenNote: 7.1.1
+Suggests: 
+    rmarkdown,
+    knitr
+VignetteBuilder: knitr

@@ -1,0 +1,138 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# parsel
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+parsel parallelizes the execution of RSelenium. It allows you to easily and conveniently run multiple RSelenium browsers simultaneously 
+to speed up your dynamic web scraping jobs.   
+
+## Installation
+
+You can install the development version of parsel from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("till-tietz/parsel")
+```
+## Example
+
+The following quick (and slightly silly) example will hopefully serve to illustrate the functions and ideas behind how parsel operates.
+We'll set up the following scraping job:
+
+1. navigate to a random wikipedia article 
+2. retrieve its title 
+3. navigate to the first linked page on the article 
+4. retrieve the linked page's title and first section 
+
+and parallelize it with parsel.
+
+parsel requires two things: 
+
+1. some scraping function defining the actions to be executed in each RSelenium instance 
+2. some input to those actions (e.g. search terms to be entered in search boxes or links to navigate to etc.)
+
+```{r}
+library(RSelenium)
+library(parsel)
+
+#let's define our scraping function input 
+#we want to run our function 20 times and we want it to start on the wikipedia main page each time 
+#(we obviously don't have to start from the main page each time but let's run with this for illustrative purposes)
+
+input <- rep("https://de.wikipedia.org",20)
+
+#let's define our scraping function 
+
+get_wiki_text <- function(x){
+  input_i <- x
+  
+  #navigate to input page (i.e wikipedia)
+  remDr$navigate(input_i)
+  
+  #find and click random article 
+  rand_art <- remDr$findElement(using = "xpath", "/html/body/div[5]/div[2]/nav[1]/div/ul/li[3]/a")
+  rand_art$clickElement()
+  
+  #get random article title 
+  title <- remDr$findElement(using = "id", "firstHeading")
+  title <- title$getElementText()[[1]]
+  
+  #check if there is a linked page
+  link_exists <- try(remDr$findElement(using = "xpath", "/html/body/div[3]/div[3]/div[5]/div[1]/p[1]/a[1]"))
+  
+  #if no linked page fill output with NA
+  if(is(link_exists,"try-error")){
+    first_link_title <- NA
+    first_link_text <- NA
+  
+  #if there is a linked page
+  } else {
+    #click on link
+    link <- remDr$findElement(using = "xpath", "/html/body/div[3]/div[3]/div[5]/div[1]/p[1]/a[1]")
+    link$clickElement()
+    
+    #get link page title
+    title_exists <- try(remDr$findElement(using = "id", "firstHeading"))
+    if(is(title_exists,"try-error")){
+      first_link_title <- NA
+    }else{
+      first_link_title <- remDr$findElement(using = "id", "firstHeading")
+      first_link_title <- first_link_title$getElementText()[[1]]
+    }
+    
+    #get 1st section of link page
+    text_exists <- try(remDr$findElement(using = "xpath", "/html/body/div[3]/div[3]/div[5]/div[1]/p[1]"))
+    if(is(text_exists,"try-error")){
+      first_link_text <- NA
+    }else{
+      first_link_text <- remDr$findElement(using = "xpath", "/html/body/div[3]/div[3]/div[5]/div[1]/p[1]")
+      first_link_text <- first_link_text$getElementText()[[1]]
+    }
+  }
+  out <- data.frame("random_article" = title,
+                    "first_link_title" = first_link_title,
+                    "first_link_text" = first_link_text)
+  return(out)
+}
+
+
+```
+
+Now that we have our scrape function + input we can parallelize the execution of the function
+
+```{r}
+wiki_text <- parsel::parscrape(scrape_fun = get_wiki_text,
+                               scrape_input = input,
+                               cores = 4,
+                               packages = c("RSelenium","XML"),
+                               browser = "firefox",
+                               chunk_size = 4,
+                               scrape_tries = 1)
+
+
+```
+
+parsel returns a list with two elements:
+
+1. a list of your scrape function output 
+2. a list of elements it was unable to scrape 
+```{r}
+str(wiki_text[["scraped_results"]])
+str(wiki_text[["not_scraped"]])
+```
+
