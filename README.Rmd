@@ -121,7 +121,6 @@ wiki_text <- parsel::parscrape(scrape_fun = get_wiki_text,
                                cores = 4,
                                packages = c("RSelenium","XML"),
                                browser = "firefox",
-                               chunk_size = 4,
                                scrape_tries = 1)
 
 

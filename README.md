@@ -117,7 +117,6 @@ wiki_text <- parsel::parscrape(scrape_fun = get_wiki_text,
                                cores = 4,
                                packages = c("RSelenium","XML"),
                                browser = "firefox",
-                               chunk_size = 4,
                                scrape_tries = 1)
 #> [1] "chunk 1 scraped"
 #> [1] "chunk 2 scraped"
@@ -137,85 +136,85 @@ parsel returns a list with two elements:
 str(wiki_text[["scraped_results"]])
 #> List of 20
 #>  $ 1 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "HD-Telefonie"
-#>   ..$ first_link_title: chr "Gigaset"
-#>   ..$ first_link_text : chr ""
+#>   ..$ random_article  : chr "Lucie Ribbe"
+#>   ..$ first_link_title: chr "1898"
+#>   ..$ first_link_text : chr "Kleinere Unglücksfälle sind in den Unterartikeln von Katastrophe aufgeführt."
 #>  $ 2 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Christian Friedrich Minameyer"
-#>   ..$ first_link_title: chr "25. Oktober"
-#>   ..$ first_link_text : chr "Der 25. Oktober ist der 298. Tag des gregorianischen Kalenders (der 299. in Schaltjahren), somit bleiben 67 Tag"| __truncated__
+#>   ..$ random_article  : chr "Joseph Brodmann"
+#>   ..$ first_link_title: chr "3. September"
+#>   ..$ first_link_text : chr "Der 3. September ist der 246. Tag des gregorianischen Kalenders (der 247. in Schaltjahren), somit bleiben 119 T"| __truncated__
 #>  $ 3 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "DSB MX (II)"
-#>   ..$ first_link_title: chr "Dieselelektrischer Antrieb"
-#>   ..$ first_link_text : chr "Der dieselelektrische Antrieb ist ein Übertragungssystem, mit dem die von großen Dieselmotoren erzeugte mechani"| __truncated__
+#>   ..$ random_article  : chr "Haigermoos"
+#>   ..$ first_link_title: chr "Gemeinde"
+#>   ..$ first_link_text : chr "Als Gemeinde oder politische Gemeinde (auch Kommune) bezeichnet man Gebietskörperschaften (territoriale und hoh"| __truncated__
 #>  $ 4 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Émile Cornic"
-#>   ..$ first_link_title: chr "23. Februar"
-#>   ..$ first_link_text : chr "Der 23. Februar ist der 54. Tag des gregorianischen Kalenders, somit bleiben 311 Tage (in Schaltjahren 312 Tage"| __truncated__
+#>   ..$ random_article  : chr "Gmina Mucharz"
+#>   ..$ first_link_title: chr "Gmina"
+#>   ..$ first_link_text : chr "Eine Gmina ['gmina], im Plural Gminy, ist eine Verwaltungseinheit in Polen. Sie bildet die dritte Stufe der lok"| __truncated__
 #>  $ 5 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Flughafen Kadala"
-#>   ..$ first_link_title: chr "IATA-Flughafencode"
-#>   ..$ first_link_text : chr "Der IATA-Flughafencode (engl. IATA airport code oder IATA station code, manchmal auch IATA (Airport) Three Lett"| __truncated__
+#>   ..$ random_article  : chr "Entschädigungseinrichtung der Wertpapierhandelsunternehmen"
+#>   ..$ first_link_title: chr "Deutschland"
+#>   ..$ first_link_text : chr "Deutschland ( ['d<U+0254><U+026A><U+032F>t<U+0361><U+0283>lant]; Vollform des Staatennamens seit 1949: Bundesre"| __truncated__
 #>  $ 6 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Werner Philipp"
-#>   ..$ first_link_title: chr "13. März"
-#>   ..$ first_link_text : chr "Der 13. März ist der 72. Tag des gregorianischen Kalenders (der 73. in Schaltjahren), somit bleiben 293 Tage bi"| __truncated__
+#>   ..$ random_article  : chr "Ócko"
+#>   ..$ first_link_title: chr "Deutsche Sprache"
+#>   ..$ first_link_text : chr "Die deutsche Sprache bzw. das Deutsche ([d<U+0254><U+026A><U+032F>t<U+0283>];[26] abgekürzt dt. oder dtsch.) is"| __truncated__
 #>  $ 7 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Saxler"
-#>   ..$ first_link_title: chr "Ortsgemeinde (Rheinland-Pfalz)"
-#>   ..$ first_link_text : chr "Als Ortsgemeinde wird in Rheinland-Pfalz eine rechtlich eigenständige Gemeinde, die einer Verbandsgemeinde als "| __truncated__
+#>   ..$ random_article  : chr "Drew Tyler Bell"
+#>   ..$ first_link_title: chr "29. Januar"
+#>   ..$ first_link_text : chr "Der 29. Januar (in Österreich und Südtirol: 29. Jänner) ist der 29. Tag des gregorianischen Kalenders, somit bl"| __truncated__
 #>  $ 8 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "NaturVision"
-#>   ..$ first_link_title: chr "Filmfestival"
-#>   ..$ first_link_text : chr "Ein Filmfestival ist eine periodisch stattfindende kulturwirtschaftliche Veranstaltung, bei der an einem bestim"| __truncated__
+#>   ..$ random_article  : chr "Konzert für zwei Klaviere (Poulenc)"
+#>   ..$ first_link_title: chr "Francis Poulenc"
+#>   ..$ first_link_text : chr "Francis Jean Marcel Poulenc [f<U+0280><U+0251>~'sis pu'l<U+025B>~k] (* 7. Januar 1899 in Paris; † 30. Januar 19"| __truncated__
 #>  $ 9 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Helmut Büttner (Richter)"
-#>   ..$ first_link_title: chr "13. November"
-#>   ..$ first_link_text : chr "Der 13. November ist der 317. Tag des gregorianischen Kalenders (der 318. in Schaltjahren), somit bleiben 48 Ta"| __truncated__
+#>   ..$ random_article  : chr "Thorakotomie"
+#>   ..$ first_link_title: chr "Chirurgie"
+#>   ..$ first_link_text : chr "Die Chirurgie (über lateinisch chirurgia von altgriechisch <U+03C7>e<U+03B9><U+03C1><U+03BF><U+03C5><U+03C1><U+"| __truncated__
 #>  $ 10:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Anne Beathe Tvinnereim"
-#>   ..$ first_link_title: chr "22. Mai"
-#>   ..$ first_link_text : chr "Der 22. Mai ist der 142. Tag des gregorianischen Kalenders (der 143. in Schaltjahren), somit verbleiben noch 22"| __truncated__
+#>   ..$ random_article  : chr "Geoje-Stadion"
+#>   ..$ first_link_title: chr "Koreanisches Alphabet"
+#>   ..$ first_link_text : chr "Das koreanische Alphabet (<U+D55C><U+AE00> Han’gul, Hangul,[1] Hangul, oder Hangeul bzw. <U+C870><U+C120><U+AE0"| __truncated__
 #>  $ 11:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Liste der Staatsoberhäupter 1226"
-#>   ..$ first_link_title: logi NA
-#>   ..$ first_link_text : logi NA
+#>   ..$ random_article  : chr "Walmdach"
+#>   ..$ first_link_title: chr "Dachform"
+#>   ..$ first_link_text : chr ""
 #>  $ 12:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Burg Mündelstein"
-#>   ..$ first_link_title: chr "Burgstall"
-#>   ..$ first_link_text : chr "Als Burgstall (Singular der Burgstall, Plural die Burgställe, altertümlich die Burgstähl[1]), auch Burgstelle, "| __truncated__
+#>   ..$ random_article  : chr "Kanton Meymac"
+#>   ..$ first_link_title: chr "Frankreich"
+#>   ..$ first_link_text : chr "Frankreich  ['f<U+0281>a<U+014B>k<U+0281>a<U+026A><U+032F>ç] (französisch France?/i [f<U+0281><U+0251>~s], amtl"| __truncated__
 #>  $ 13:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Karl Schultheiss (Maler)"
-#>   ..$ first_link_title: chr "21. August"
-#>   ..$ first_link_text : chr "Der 21. August ist der 233. Tag des gregorianischen Kalenders (der 234. in Schaltjahren), somit bleiben 132 Tag"| __truncated__
+#>   ..$ random_article  : chr "Baron Strathcona and Mount Royal"
+#>   ..$ first_link_title: chr "Peer (Adel)"
+#>   ..$ first_link_text : chr "Ein Peer (vom lat. par „gleich, ebenbürtig“; französisch Pair) ist ein Angehöriger des britischen Hochadels."
 #>  $ 14:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Rungwe"
-#>   ..$ first_link_title: chr "Vulkan"
-#>   ..$ first_link_text : chr "Ein Vulkan ist eine geologische Struktur, die entsteht, wenn Magma (Gesteinsschmelze) bis an die Oberfläche ein"| __truncated__
+#>   ..$ random_article  : chr "Georg Bauch"
+#>   ..$ first_link_title: chr "7. September"
+#>   ..$ first_link_text : chr "Der 7. September ist der 250. Tag des gregorianischen Kalenders (der 251. in Schaltjahren), somit bleiben 115 T"| __truncated__
 #>  $ 15:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Chris Abrahams"
-#>   ..$ first_link_title: chr "9. April"
-#>   ..$ first_link_text : chr "Der 9. April ist der 99. Tag des gregorianischen Kalenders (der 100. in Schaltjahren), somit bleiben 266 Tage b"| __truncated__
+#>   ..$ random_article  : chr "Udo Mantau"
+#>   ..$ first_link_title: chr "17. Oktober"
+#>   ..$ first_link_text : chr "Der 17. Oktober ist der 290. Tag des gregorianischen Kalenders (der 291. in Schaltjahren), somit verbleiben 75 "| __truncated__
 #>  $ 16:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Hawaii Railway"
-#>   ..$ first_link_title: chr "Hawaii"
-#>   ..$ first_link_text : chr "Hawaii ([ha'va<U+035C>ii], englisch [h<U+0259>'w<U+0251><U+02D0>i<U+02D0>], hawaiisch Hawai<U+02BB>i bzw. Mokup"| __truncated__
+#>   ..$ random_article  : chr "Bruno Wolke"
+#>   ..$ first_link_title: chr "4. Mai"
+#>   ..$ first_link_text : chr "Der 4. Mai ist der 124. Tag des gregorianischen Kalenders (der 125. in Schaltjahren), somit bleiben 241 Tage bi"| __truncated__
 #>  $ 17:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "IC 3223"
-#>   ..$ first_link_title: logi NA
-#>   ..$ first_link_text : logi NA
+#>   ..$ random_article  : chr "Kalle Järvilehto"
+#>   ..$ first_link_title: chr "21. Juli"
+#>   ..$ first_link_text : chr "Der 21. Juli ist der 202. Tag des gregorianischen Kalenders (der 203. in Schaltjahren), somit bleiben 163 Tage "| __truncated__
 #>  $ 18:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Wittekind zu Waldeck und Pyrmont"
-#>   ..$ first_link_title: chr "9. März"
-#>   ..$ first_link_text : chr "Der 9. März ist der 68. Tag des gregorianischen Kalenders (der 69. in Schaltjahren), somit bleiben 297 Tage bis"| __truncated__
+#>   ..$ random_article  : chr "Wonder Why"
+#>   ..$ first_link_title: chr "Nikolaus Brodszky"
+#>   ..$ first_link_text : chr "Nikolaus Brodszky (auch Nicolas oder Miklós Brodszky; * 20. April 1905 in Odessa, Russisches Kaiserreich als Mi"| __truncated__
 #>  $ 19:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Pfarrhaus Aich (Fürstenfeldbruck)"
-#>   ..$ first_link_title: chr "Aich (Fürstenfeldbruck)"
-#>   ..$ first_link_text : chr "Aich ist ein amtlich benannter Gemeindeteil der Oberbayerischen Stadt Fürstenfeldbruck in Bayern."
+#>   ..$ random_article  : chr "División de Honor (Schach) 1997"
+#>   ..$ first_link_title: chr "Spanische Mannschaftsmeisterschaft im Schach"
+#>   ..$ first_link_text : chr "Die spanische Mannschaftsmeisterschaft im Schach (spanisch Campeonato de España de Ajedrez por Equipos de Club)"| __truncated__
 #>  $ 20:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Liste der Baudenkmäler in Schwanenberg"
-#>   ..$ first_link_title: chr "Denkmalschutz"
-#>   ..$ first_link_text : chr "Denkmalschutz dient dem Schutz von Kulturdenkmälern und kulturhistorisch relevanten Gesamtanlagen (Ensembleschu"| __truncated__
+#>   ..$ random_article  : chr "Walter Buchebner"
+#>   ..$ first_link_title: chr "1929"
+#>   ..$ first_link_text : chr "Kleinere Unglücksfälle sind in den Unterartikeln von Katastrophe aufgeführt."
 str(wiki_text[["not_scraped"]])
 #>  NULL
 ```
