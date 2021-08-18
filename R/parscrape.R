@@ -10,7 +10,7 @@
 #' @return list with output of scrape_fun in "scraped_results" and a vector of indices of scrape_input elements that could not be scraped in "not_scaped"
 #' @export
 
-parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base"), browser, ports = NULL, chunk_size = NULL, scrape_tries = 2){
+parscrape <- function(scrape_fun, scrape_input, cores, packages = c("base"), browser, ports = NULL, chunk_size = NULL, scrape_tries = 2){
 
   if(missing(scrape_fun)){
     stop("missing scrape_fun")
@@ -28,6 +28,10 @@ parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base
     stop("missing cores")
   }
 
+  if(!is.numeric(cores)){
+    stop("cores is not numeric")
+  }
+
   if(missing(packages)){
     stop("missing packages")
   }
@@ -36,28 +40,24 @@ parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base
     stop("missing browser")
   }
 
-  if(missing(ports)){
-    stop("missing ports")
-  }
-
-  if(missing(chunk_size)){
-    stop("missing chunk_size")
-  }
-
   if(missing(scrape_tries)){
     stop("missing scrape_tries")
+  }
+
+  if(!is.numeric(scrape_tries)){
+    stop("scrape_tries not numeric")
   }
 
   if(is.null(ports)){
     ports <- sample(1000:9999, cores, replace = FALSE)
   }
 
-  if(is.null(chunk_size)){
-    chunk_size <- cores
-  }
-
   if(is.null(cores)){
     cores <- parallel::detectCores() - 1
+  }
+
+  if(is.null(chunk_size)){
+    chunk_size <- cores
   }
 
   ports <- as.list(ports)

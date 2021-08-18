@@ -20,7 +20,7 @@ parscrape(
 
 \item{scrape_input}{a data frame, list, or vector where each element is an input to be passed to scrape_function}
 
-\item{cores}{number of cores to run RSelenium instances on}
+\item{cores}{number of cores to run RSelenium instances on. Defaults to available cores - 1.}
 
 \item{packages}{a character vector with package names of packages used in scrape_function}
 
