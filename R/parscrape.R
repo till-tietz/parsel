@@ -1,7 +1,7 @@
 #' parallelize execution of RSelenium
 #' @param scrape_fun a function with input x sending instructions to remDr (remote driver)/ scraping function to be parallelized
 #' @param scrape_input a data frame, list, or vector where each element is an input to be passed to scrape_function
-#' @param cores number of cores to run RSelenium instances on
+#' @param cores number of cores to run RSelenium instances on. Defaults to available cores - 1.
 #' @param packages a character vector with package names of packages used in scrape_function
 #' @param browser a character vector specifying the browser to be used
 #' @param ports vector of ports for RSelenium instances (if left at default NULL parscrape will randomly generate ports)
@@ -10,7 +10,7 @@
 #' @return list with output of scrape_fun in "scraped_results" and a vector of indices of scrape_input elements that could not be scraped in "not_scaped"
 #' @export
 
-parscrape <- function(scrape_fun, scrape_input, cores, packages = c("base"), browser, ports = NULL, chunk_size = NULL, scrape_tries = 2){
+parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base"), browser, ports = NULL, chunk_size = NULL, scrape_tries = 2){
 
   if(missing(scrape_fun)){
     stop("missing scrape_fun")
@@ -54,6 +54,10 @@ parscrape <- function(scrape_fun, scrape_input, cores, packages = c("base"), bro
 
   if(is.null(chunk_size)){
     chunk_size <- cores
+  }
+
+  if(is.null(cores)){
+    cores <- parallel::detectCores() - 1
   }
 
   ports <- as.list(ports)
@@ -124,6 +128,7 @@ parscrape <- function(scrape_fun, scrape_input, cores, packages = c("base"), bro
   close_rselenium()
   parallel::stopCluster(clust)
 }
+
 
 
 
