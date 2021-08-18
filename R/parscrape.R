@@ -5,15 +5,55 @@
 #' @param packages a character vector with package names of packages used in scrape_function
 #' @param browser a character vector specifying the browser to be used
 #' @param ports vector of ports for RSelenium instances (if left at default NULL parscrape will randomly generate ports)
-#' @param chunk_size number of scrape_input elements to be processed per round of scrape_function (parscrape splits scrape_input into chunks and runs scrape_function in multiple rounds to avoid loosing data due to errors)
+#' @param chunk_size number of scrape_input elements to be processed per round of scrape_function (parscrape splits scrape_input into chunks and runs scrape_function in multiple rounds to avoid loosing data due to errors). Defaults to number of cores.
 #' @param scrape_tries sets number of times parscrape will re-try to scrape a chunk when encountering an error
 #' @return list with output of scrape_fun in "scraped_results" and a vector of indices of scrape_input elements that could not be scraped in "not_scaped"
 #' @export
 
-parscrape <- function(scrape_fun, scrape_input, cores, packages, browser, ports = NULL, chunk_size = 10, scrape_tries = 2){
+parscrape <- function(scrape_fun, scrape_input, cores, packages = c("base"), browser, ports = NULL, chunk_size = NULL, scrape_tries = 2){
+
+  if(missing(scrape_fun)){
+    stop("missing scrape_fun")
+  }
+
+  if(!is.function(scrape_fun)){
+    stop("scrape_fun is not a function")
+  }
+
+  if(missing(scrape_input)){
+    stop("missing scrape_input")
+  }
+
+  if(missing(cores)){
+    stop("missing cores")
+  }
+
+  if(missing(packages)){
+    stop("missing packages")
+  }
+
+  if(missing(browser)){
+    stop("missing browser")
+  }
+
+  if(missing(ports)){
+    stop("missing ports")
+  }
+
+  if(missing(chunk_size)){
+    stop("missing chunk_size")
+  }
+
+  if(missing(scrape_tries)){
+    stop("missing scrape_tries")
+  }
 
   if(is.null(ports)){
     ports <- sample(1000:9999, cores, replace = FALSE)
+  }
+
+  if(is.null(chunk_size)){
+    chunk_size <- cores
   }
 
   ports <- as.list(ports)
