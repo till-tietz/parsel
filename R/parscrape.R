@@ -89,8 +89,16 @@ parscrape <- function(scrape_fun, scrape_input, cores, packages = c("base"), bro
   chunks <- split(c(1:length(scrape_input)), ceiling(seq_along(c(1:length(scrape_input)))/chunk_size))
 
   result_list <- vector(mode = "list", length = length(chunks))
+  lres <- length(result_list)
+
+  pb <- txtProgressBar(min = 0, max = lres, style = 3,
+                       width = lres, char = "=")
+
+  init <- numeric(lres)
+  end <- numeric(lres)
 
   for(i in c(1:length(result_list))){
+    init[i] <- Sys.time()
     chunk_i <- chunks[[i]]
     input_i <- scrape_input[chunk_i]
     n_tries <- 0
@@ -98,7 +106,6 @@ parscrape <- function(scrape_fun, scrape_input, cores, packages = c("base"), bro
       scrape_out <- try(parallel::parLapply(clust, input_i, scrape_fun), silent=TRUE)
       n_tries <- n_tries + 1
       if(!is(scrape_out, 'try-error')){
-        print(paste(paste("chunk", i, sep = " "), "scraped", sep = " "))
         break
       }
       if(n_tries == scrape_tries){
@@ -112,7 +119,18 @@ parscrape <- function(scrape_fun, scrape_input, cores, packages = c("base"), bro
       }
     }
     result_list[[i]] <- scrape_out
+    end[i] <- Sys.time()
+    setTxtProgressBar(pb, i)
+
+    time <- round(lubridate::seconds_to_period(sum(end - init)), 0)
+    est <- lres * (mean(end[end != 0] - init[init != 0])) - time
+    remainining <- round(lubridate::seconds_to_period(est), 0)
+
+    cat(paste(" // Execution time:", time,
+              " // Estimated time remaining:", remainining), "")
   }
+
+  close(pb)
 
   if("RSelenium ERROR" %in% result_list){
     unscraped <- unlist(chunks[which(result_list == "RSelenium ERROR")])
@@ -128,7 +146,6 @@ parscrape <- function(scrape_fun, scrape_input, cores, packages = c("base"), bro
   close_rselenium()
   parallel::stopCluster(clust)
 }
-
 
 
 
