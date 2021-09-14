@@ -1,1 +1,4 @@
 exportPattern("^[[:alpha:]]+")
+importFrom("methods", "is")
+importFrom("utils", "setTxtProgressBar", "txtProgressBar")
+
