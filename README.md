@@ -109,7 +109,9 @@ get_wiki_text <- function(x){
 ```
 
 Now that we have our scrape function + input we can parallelize the
-execution of the function
+execution of the function. parscrape will show a progress bar, as well
+as elapsed and estimated remaining time indicators so you can keep track
+of scraping progress.
 
 ``` r
 wiki_text <- parsel::parscrape(scrape_fun = get_wiki_text,
@@ -118,11 +120,6 @@ wiki_text <- parsel::parscrape(scrape_fun = get_wiki_text,
                                packages = c("RSelenium","XML"),
                                browser = "firefox",
                                scrape_tries = 1)
-#> [1] "chunk 1 scraped"
-#> [1] "chunk 2 scraped"
-#> [1] "chunk 3 scraped"
-#> [1] "chunk 4 scraped"
-#> [1] "chunk 5 scraped"
 ```
 
 parsel returns a list with two elements:
@@ -136,85 +133,85 @@ parsel returns a list with two elements:
 str(wiki_text[["scraped_results"]])
 #> List of 20
 #>  $ 1 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Lucie Ribbe"
-#>   ..$ first_link_title: chr "1898"
-#>   ..$ first_link_text : chr "Kleinere Unglücksfälle sind in den Unterartikeln von Katastrophe aufgeführt."
+#>   ..$ random_article  : chr "Pazifikdegu"
+#>   ..$ first_link_title: chr "Nagetiere"
+#>   ..$ first_link_text : chr "Die Nagetiere (Rodentia) sind eine Ordnung der Säugetiere (Mammalia). Mit etwa 2500[1] bis 2600[2] Arten stelle"| __truncated__
 #>  $ 2 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Joseph Brodmann"
-#>   ..$ first_link_title: chr "3. September"
-#>   ..$ first_link_text : chr "Der 3. September ist der 246. Tag des gregorianischen Kalenders (der 247. in Schaltjahren), somit bleiben 119 T"| __truncated__
+#>   ..$ random_article  : chr "Fareva"
+#>   ..$ first_link_title: chr "Holding"
+#>   ..$ first_link_text : chr "Holding (Kurzform für Holding-Gesellschaft, Holding-Organisation oder auch Dachgesellschaft) ist der Anglizismu"| __truncated__
 #>  $ 3 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Haigermoos"
-#>   ..$ first_link_title: chr "Gemeinde"
-#>   ..$ first_link_text : chr "Als Gemeinde oder politische Gemeinde (auch Kommune) bezeichnet man Gebietskörperschaften (territoriale und hoh"| __truncated__
+#>   ..$ random_article  : chr "Peter Fratzl"
+#>   ..$ first_link_title: chr "13. September"
+#>   ..$ first_link_text : chr "Der 13. September ist der 256. Tag des gregorianischen Kalenders (der 257. in Schaltjahren). Somit verbleiben n"| __truncated__
 #>  $ 4 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Gmina Mucharz"
-#>   ..$ first_link_title: chr "Gmina"
-#>   ..$ first_link_text : chr "Eine Gmina ['gmina], im Plural Gminy, ist eine Verwaltungseinheit in Polen. Sie bildet die dritte Stufe der lok"| __truncated__
+#>   ..$ random_article  : chr "Schlacht um Baku"
+#>   ..$ first_link_title: chr "Osmanisches Reich"
+#>   ..$ first_link_text : chr "Das Osmanische Reich (osmanisch <U+062F><U+0648><U+0644><U+062A> <U+0639><U+0644><U+06CC><U+0647> IA Devlet-i <"| __truncated__
 #>  $ 5 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Entschädigungseinrichtung der Wertpapierhandelsunternehmen"
-#>   ..$ first_link_title: chr "Deutschland"
-#>   ..$ first_link_text : chr "Deutschland ( ['d<U+0254><U+026A><U+032F>t<U+0361><U+0283>lant]; Vollform des Staatennamens seit 1949: Bundesre"| __truncated__
+#>   ..$ random_article  : chr "Lloyd Burdick"
+#>   ..$ first_link_title: chr "8. August"
+#>   ..$ first_link_text : chr "Der 8. August ist der 220. Tag des gregorianischen Kalenders (der 221. in Schaltjahren), somit bleiben 145 Tage"| __truncated__
 #>  $ 6 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Ócko"
-#>   ..$ first_link_title: chr "Deutsche Sprache"
-#>   ..$ first_link_text : chr "Die deutsche Sprache bzw. das Deutsche ([d<U+0254><U+026A><U+032F>t<U+0283>];[26] abgekürzt dt. oder dtsch.) is"| __truncated__
+#>   ..$ random_article  : chr "Liste der Nummer-eins-Hits in Australien (1969)"
+#>   ..$ first_link_title: logi NA
+#>   ..$ first_link_text : logi NA
 #>  $ 7 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Drew Tyler Bell"
-#>   ..$ first_link_title: chr "29. Januar"
-#>   ..$ first_link_text : chr "Der 29. Januar (in Österreich und Südtirol: 29. Jänner) ist der 29. Tag des gregorianischen Kalenders, somit bl"| __truncated__
+#>   ..$ random_article  : chr "Maria-Josepha-Straße"
+#>   ..$ first_link_title: chr "München"
+#>   ..$ first_link_text : chr "München (hochdeutsch  ['m<U+028F>nçn<U+0329>] oder ['m<U+028F>nç<U+0259>n];[2] bairisch Minga?/i ['m<U+026A><U+"| __truncated__
 #>  $ 8 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Konzert für zwei Klaviere (Poulenc)"
-#>   ..$ first_link_title: chr "Francis Poulenc"
-#>   ..$ first_link_text : chr "Francis Jean Marcel Poulenc [f<U+0280><U+0251>~'sis pu'l<U+025B>~k] (* 7. Januar 1899 in Paris; † 30. Januar 19"| __truncated__
+#>   ..$ random_article  : chr "Gisela Enders"
+#>   ..$ first_link_title: chr "25. Mai"
+#>   ..$ first_link_text : chr "Der 25. Mai ist der 145. Tag des gregorianischen Kalenders (der 146. in Schaltjahren), somit bleiben 220 Tage b"| __truncated__
 #>  $ 9 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Thorakotomie"
-#>   ..$ first_link_title: chr "Chirurgie"
-#>   ..$ first_link_text : chr "Die Chirurgie (über lateinisch chirurgia von altgriechisch <U+03C7>e<U+03B9><U+03C1><U+03BF><U+03C5><U+03C1><U+"| __truncated__
+#>   ..$ random_article  : chr "Frauenthal (Weiding)"
+#>   ..$ first_link_title: chr "Bayern"
+#>   ..$ first_link_text : chr "Der Freistaat Bayern ( ['ba<U+026A><U+032F><U+0250>n]; Ländercode BY) ist mit mehr als 70.500 Quadratkilometern"| __truncated__
 #>  $ 10:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Geoje-Stadion"
-#>   ..$ first_link_title: chr "Koreanisches Alphabet"
-#>   ..$ first_link_text : chr "Das koreanische Alphabet (<U+D55C><U+AE00> Han’gul, Hangul,[1] Hangul, oder Hangeul bzw. <U+C870><U+C120><U+AE0"| __truncated__
+#>   ..$ random_article  : chr "Ponta da Garça (Príncipe)"
+#>   ..$ first_link_title: chr "Príncipe"
+#>   ..$ first_link_text : chr "Príncipe (portugiesisch für „Fürst“, „Prinz“), deutsch Prinzeninsel, ist die nördlichere der beiden Hauptinseln"| __truncated__
 #>  $ 11:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Walmdach"
-#>   ..$ first_link_title: chr "Dachform"
-#>   ..$ first_link_text : chr ""
+#>   ..$ random_article  : chr "Wladimir Apziauri"
+#>   ..$ first_link_title: chr "4. Februar"
+#>   ..$ first_link_text : chr "Der 4. Februar ist der 35. Tag des gregorianischen Kalenders, somit bleiben 330 Tage (in Schaltjahren 331 Tage)"| __truncated__
 #>  $ 12:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Kanton Meymac"
+#>   ..$ random_article  : chr "Petros Markaris"
+#>   ..$ first_link_title: chr "1. Januar"
+#>   ..$ first_link_text : chr "Der 1. Januar (in Österreich und Südtirol: 1. Jänner) ist der 1. Tag des gregorianischen Kalenders,[1] somit bl"| __truncated__
+#>  $ 13:'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "Condamine (Ain)"
 #>   ..$ first_link_title: chr "Frankreich"
 #>   ..$ first_link_text : chr "Frankreich  ['f<U+0281>a<U+014B>k<U+0281>a<U+026A><U+032F>ç] (französisch France?/i [f<U+0281><U+0251>~s], amtl"| __truncated__
-#>  $ 13:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Baron Strathcona and Mount Royal"
-#>   ..$ first_link_title: chr "Peer (Adel)"
-#>   ..$ first_link_text : chr "Ein Peer (vom lat. par „gleich, ebenbürtig“; französisch Pair) ist ein Angehöriger des britischen Hochadels."
 #>  $ 14:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Georg Bauch"
-#>   ..$ first_link_title: chr "7. September"
-#>   ..$ first_link_text : chr "Der 7. September ist der 250. Tag des gregorianischen Kalenders (der 251. in Schaltjahren), somit bleiben 115 T"| __truncated__
+#>   ..$ random_article  : chr "Spandauer SV"
+#>   ..$ first_link_title: chr "Berlin-Spandau"
+#>   ..$ first_link_text : chr "Spandau ist der namensgebende Ortsteil im Bezirk Spandau von Berlin."
 #>  $ 15:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Udo Mantau"
-#>   ..$ first_link_title: chr "17. Oktober"
-#>   ..$ first_link_text : chr "Der 17. Oktober ist der 290. Tag des gregorianischen Kalenders (der 291. in Schaltjahren), somit verbleiben 75 "| __truncated__
+#>   ..$ random_article  : chr "Heinrich Keller (Musiker)"
+#>   ..$ first_link_title: chr "25. August"
+#>   ..$ first_link_text : chr "Der 25. August ist der 237. Tag des gregorianischen Kalenders (der 238. in Schaltjahren), somit bleiben noch 12"| __truncated__
 #>  $ 16:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Bruno Wolke"
-#>   ..$ first_link_title: chr "4. Mai"
-#>   ..$ first_link_text : chr "Der 4. Mai ist der 124. Tag des gregorianischen Kalenders (der 125. in Schaltjahren), somit bleiben 241 Tage bi"| __truncated__
+#>   ..$ random_article  : chr "KZ-Außenlager Regensburg"
+#>   ..$ first_link_title: chr "KZ-Außenlager"
+#>   ..$ first_link_text : chr "Den Begriff KZ-Außenlager als Abkürzung für einen räumlich separat liegenden Teil eines Konzentrationslagers be"| __truncated__
 #>  $ 17:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Kalle Järvilehto"
-#>   ..$ first_link_title: chr "21. Juli"
-#>   ..$ first_link_text : chr "Der 21. Juli ist der 202. Tag des gregorianischen Kalenders (der 203. in Schaltjahren), somit bleiben 163 Tage "| __truncated__
+#>   ..$ random_article  : chr "Herr Satan persönlich"
+#>   ..$ first_link_title: logi NA
+#>   ..$ first_link_text : logi NA
 #>  $ 18:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Wonder Why"
-#>   ..$ first_link_title: chr "Nikolaus Brodszky"
-#>   ..$ first_link_text : chr "Nikolaus Brodszky (auch Nicolas oder Miklós Brodszky; * 20. April 1905 in Odessa, Russisches Kaiserreich als Mi"| __truncated__
+#>   ..$ random_article  : chr "Renaissance Tower"
+#>   ..$ first_link_title: chr "Dallas"
+#>   ..$ first_link_text : chr "Dallas (['dæl<U+0259>s]) ist nach Houston und San Antonio die drittgrößte Stadt im Bundesstaat Texas und die ne"| __truncated__
 #>  $ 19:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "División de Honor (Schach) 1997"
-#>   ..$ first_link_title: chr "Spanische Mannschaftsmeisterschaft im Schach"
-#>   ..$ first_link_text : chr "Die spanische Mannschaftsmeisterschaft im Schach (spanisch Campeonato de España de Ajedrez por Equipos de Club)"| __truncated__
+#>   ..$ random_article  : chr "Grootes Peak"
+#>   ..$ first_link_title: chr "Berg"
+#>   ..$ first_link_text : chr "Ein Berg ist eine Landform, die sich über die Umgebung erhebt. Er ist meist höher und steiler als ein Hügel, wo"| __truncated__
 #>  $ 20:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Walter Buchebner"
-#>   ..$ first_link_title: chr "1929"
-#>   ..$ first_link_text : chr "Kleinere Unglücksfälle sind in den Unterartikeln von Katastrophe aufgeführt."
+#>   ..$ random_article  : chr "Glücksindikator"
+#>   ..$ first_link_title: chr "Kennzahl"
+#>   ..$ first_link_text : chr "Eine Kennzahl ist eine Maßzahl, die zur Quantifizierung dient und der eine Vorschrift zur quantitativen reprodu"| __truncated__
 str(wiki_text[["not_scraped"]])
 #>  NULL
 ```

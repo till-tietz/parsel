@@ -113,9 +113,11 @@ get_wiki_text <- function(x){
 
 ```
 
-Now that we have our scrape function + input we can parallelize the execution of the function
+Now that we have our scrape function + input we can parallelize the execution of the function.
+parscrape will show a progress bar, as well as elapsed and estimated remaining time indicators so you 
+can keep track of scraping progress. 
 
-```{r}
+```{r, results = 'hide', warning = FALSE}
 wiki_text <- parsel::parscrape(scrape_fun = get_wiki_text,
                                scrape_input = input,
                                cores = 4,
