@@ -8,8 +8,6 @@
 [![R-CMD-check](https://github.com/till-tietz/parsel/workflows/R-CMD-check/badge.svg)](https://github.com/till-tietz/parsel/actions)
 <!-- badges: end -->
 
-badgecreatr::badgeplacer()
-
 parsel parallelizes the execution of RSelenium. It allows you to easily
 and conveniently run multiple RSelenium browsers simultaneously to speed
 up your dynamic web scraping jobs.
@@ -136,85 +134,85 @@ parsel returns a list with two elements:
 str(wiki_text[["scraped_results"]])
 #> List of 20
 #>  $ 1 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Bhakkar (Distrikt)"
-#>   ..$ first_link_title: chr "Pakistan"
-#>   ..$ first_link_text : chr "Pakistan (Urdu <U+067E><U+0627><U+06A9><U+0633><U+062A><U+0627><U+0646>  [pa<U+02D0>k<U+026A>st<U+032A>a<U+02D0"| __truncated__
+#>   ..$ random_article  : chr "Uralan Elista"
+#>   ..$ first_link_title: chr "Transliteration"
+#>   ..$ first_link_text : chr "Transliteration (von lateinisch trans ‚hinüber‘ und litera (auch littera) ‚Buchstabe‘) bezeichnet in der angewa"| __truncated__
 #>  $ 2 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Tomas Andersson Wij"
-#>   ..$ first_link_title: chr "6. Februar"
-#>   ..$ first_link_text : chr "Der 6. Februar ist der 37. Tag des gregorianischen Kalenders, somit bleiben 328 Tage (in Schaltjahren 329 Tage)"| __truncated__
+#>   ..$ random_article  : chr "Sven Metzger"
+#>   ..$ first_link_title: chr "7. Januar"
+#>   ..$ first_link_text : chr "Der 7. Januar (in Österreich und Südtirol: 7. Jänner) ist der 7. Tag des gregorianischen Kalenders, somit verbl"| __truncated__
 #>  $ 3 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr ""
-#>   ..$ first_link_title: logi NA
+#>   ..$ random_article  : chr "Karl Stephan (Propst)"
+#>   ..$ first_link_title: chr "1700"
 #>   ..$ first_link_text : logi NA
 #>  $ 4 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Erlöser (Zürich-Riesbach)"
-#>   ..$ first_link_title: chr "Römisch-katholische Kirche"
-#>   ..$ first_link_text : chr "Die römisch-katholische Kirche („katholisch“ von griechisch <U+03BA>a<U+03B8><U+03BF><U+03BB><U+03B9><U+03BA><U"| __truncated__
+#>   ..$ random_article  : chr "Enid Lake"
+#>   ..$ first_link_title: chr "Stausee"
+#>   ..$ first_link_text : chr "Ein Stausee, vor allem in Österreich auch Speicher genannt, ist ein künstlich angelegter See, der sich in einem"| __truncated__
 #>  $ 5 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "GQ Lupi"
-#>   ..$ first_link_title: chr "Stern"
-#>   ..$ first_link_text : chr "Unter einem Stern (altgriechisch <U+1F00>st<U+03AE><U+03C1>, <U+1F04>st<U+03C1><U+03BF><U+03BD> aster, astron u"| __truncated__
+#>   ..$ random_article  : chr "Gustav Mahler"
+#>   ..$ first_link_title: chr "7. Juli"
+#>   ..$ first_link_text : chr "Der 7. Juli ist der 188. Tag des gregorianischen Kalenders (der 189. in Schaltjahren), somit bleiben 177 Tage b"| __truncated__
 #>  $ 6 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Nocturnal Breed"
-#>   ..$ first_link_title: chr "Norwegen"
-#>   ..$ first_link_text : chr "Norwegen (norwegisch: Norge (Bokmål) oder Noreg (Nynorsk); nordsamisch: Norga; lulesamisch: Vuodna; südsamisch:"| __truncated__
+#>   ..$ random_article  : chr "Buddhas Fußabdruck"
+#>   ..$ first_link_title: chr "Buddha"
+#>   ..$ first_link_text : chr ""
 #>  $ 7 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Orthodoxe Johanneskapelle (Kevelaer)"
-#>   ..$ first_link_title: chr "Orthodoxie"
-#>   ..$ first_link_text : chr "Orthodoxie (altgriechisch <U+1F40><U+03C1><U+03B8><U+03CC><U+03C2> orthós „richtig“, „geradlinig“ und d<U+03CC>"| __truncated__
+#>   ..$ random_article  : chr "Heinrich Göckenjan"
+#>   ..$ first_link_title: chr "30. September"
+#>   ..$ first_link_text : chr "Der 30. September ist der 273. Tag des gregorianischen Kalenders (der 274. in Schaltjahren), somit bleiben 92 T"| __truncated__
 #>  $ 8 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Hartwig Möller"
-#>   ..$ first_link_title: chr "1944"
-#>   ..$ first_link_text : chr "Das Jahr 1944 ist von der Eröffnung der „Zweiten Front“ in Westeuropa im Zweiten Weltkrieg gegen das Deutsche R"| __truncated__
+#>   ..$ random_article  : chr "Landhotel Falkner"
+#>   ..$ first_link_title: chr "„Marsbach (Gemeinde Hofkirchen)“ – Erstellen"
+#>   ..$ first_link_text : logi NA
 #>  $ 9 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Nadelsiepen"
-#>   ..$ first_link_title: chr "Radevormwald"
-#>   ..$ first_link_text : chr "Radevormwald – ortsübliche Kurzform: Rade – gehört zu den ältesten Städten im Bergischen Land in Nordrhein-West"| __truncated__
+#>   ..$ random_article  : chr "Heinrich Modersohn"
+#>   ..$ first_link_title: chr "1948"
+#>   ..$ first_link_text : chr "Im Jahr 1948 steht vor allem die Zuspitzung der alliierten Gegensätze in der deutschen Frage im Mittelpunkt des"| __truncated__
 #>  $ 10:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Georgia Langhans"
-#>   ..$ first_link_title: chr "4. Juli"
-#>   ..$ first_link_text : chr "Der 4. Juli ist der 185. Tag des gregorianischen Kalenders (der 186. in Schaltjahren), somit bleiben 180 Tage b"| __truncated__
+#>   ..$ random_article  : chr "Digitalisierung von Schiffsplänen"
+#>   ..$ first_link_title: chr "Deutsches Schifffahrtsmuseum"
+#>   ..$ first_link_text : chr "Das Deutsche Schifffahrtsmuseum (DSM) in Bremerhaven ist das nationale Schifffahrtsmuseum in Deutschland. Es ge"| __truncated__
 #>  $ 11:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Boisse-Penchot"
+#>   ..$ random_article  : chr "Claes Nordin"
+#>   ..$ first_link_title: chr "20. Juli"
+#>   ..$ first_link_text : chr "Der 20. Juli ist der 201. Tag des gregorianischen Kalenders (der 202. in Schaltjahren), somit bleiben 164 Tage "| __truncated__
+#>  $ 12:'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "Victor Kolyvagin"
 #>   ..$ first_link_title: logi NA
 #>   ..$ first_link_text : logi NA
-#>  $ 12:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Nächte des Grauens (1916)"
-#>   ..$ first_link_title: chr "Stummfilm"
-#>   ..$ first_link_text : chr "Als Stummfilm wird seit der Verbreitung des Tonfilms in den 1920er-Jahren ein Film ohne technisch-mechanisch vo"| __truncated__
 #>  $ 13:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "William Gay Brown senior"
-#>   ..$ first_link_title: chr "25. September"
-#>   ..$ first_link_text : chr "Der 25. September ist der 268. Tag des gregorianischen Kalenders (der 269. in Schaltjahren). Zum Jahresende ver"| __truncated__
+#>   ..$ random_article  : chr "Geschichte des Oberleitungsbusses"
+#>   ..$ first_link_title: chr "Oberleitungsbus"
+#>   ..$ first_link_text : chr "Ein Oberleitungsbus – auch Oberleitungsomnibus, Obus, O-Bus, Trolleybus, Trolley oder veraltet gleislose Bahn[1"| __truncated__
 #>  $ 14:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Annika Graser"
-#>   ..$ first_link_title: chr "3. September"
-#>   ..$ first_link_text : chr "Der 3. September ist der 246. Tag des gregorianischen Kalenders (der 247. in Schaltjahren), somit bleiben 119 T"| __truncated__
+#>   ..$ random_article  : chr "Reipisch"
+#>   ..$ first_link_title: chr "Frankleben"
+#>   ..$ first_link_text : chr "Frankleben ist seit dem 1. Januar 2004 ein Ortsteil von Braunsbedra[1] im Saalekreis in Sachsen-Anhalt."
 #>  $ 15:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Comandante Luis Piedra Buena"
-#>   ..$ first_link_title: chr "Departamento Corpen Aike"
-#>   ..$ first_link_text : chr "Das Departamento Corpen Aike liegt im Osten der Provinz Santa Cruz im Süden Argentiniens und ist eine der siebe"| __truncated__
+#>   ..$ random_article  : chr "Liste der Monuments historiques in Forbach"
+#>   ..$ first_link_title: chr "Frankreich"
+#>   ..$ first_link_text : chr "Frankreich  ['f<U+0281>a<U+014B>k<U+0281>a<U+026A><U+032F>ç] (französisch France?/i [f<U+0281><U+0251>~s], amtl"| __truncated__
 #>  $ 16:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Großer Preis von Deutschland"
-#>   ..$ first_link_title: chr "Automobilsport"
-#>   ..$ first_link_text : chr "Der Automobilsport als Form des Motorsports umfasst alle Disziplinen und Wettbewerbe, die das möglichst schnell"| __truncated__
+#>   ..$ random_article  : chr "Schaufenster Elektromobilität"
+#>   ..$ first_link_title: chr "Bundesregierung (Deutschland)"
+#>   ..$ first_link_text : chr "Die Bundesregierung (Abkürzung BReg),[1] auch Bundeskabinett genannt, ist ein Verfassungsorgan der Bundesrepubl"| __truncated__
 #>  $ 17:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Río Aysén"
-#>   ..$ first_link_title: chr "Patagonien"
-#>   ..$ first_link_text : chr "Patagonien bezeichnet den Teil Südamerikas, der sich südlich der Flüsse Río Colorado in Argentinien und Río Bío"| __truncated__
+#>   ..$ random_article  : chr "Heinz Rotholz"
+#>   ..$ first_link_title: chr "28. Mai"
+#>   ..$ first_link_text : chr "Der 28. Mai ist der 148. Tag des gregorianischen Kalenders (der 149. in Schaltjahren), somit verbleiben noch 21"| __truncated__
 #>  $ 18:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Moritz August von Obernitz"
-#>   ..$ first_link_title: chr "14. September"
-#>   ..$ first_link_text : chr "Der 14. September ist der 257. Tag des gregorianischen Kalenders (der 258. in Schaltjahren), somit bleiben noch"| __truncated__
+#>   ..$ random_article  : chr "Inger-Marie Ytterhorn"
+#>   ..$ first_link_title: chr "18. September"
+#>   ..$ first_link_text : chr "Der 18. September ist der 261. Tag des gregorianischen Kalenders (der 262. in Schaltjahren). Zum Jahresende ver"| __truncated__
 #>  $ 19:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Claudius Berenicianus"
-#>   ..$ first_link_title: chr "Praenomen"
-#>   ..$ first_link_text : chr "Das Praenomen war im antiken Rom das erste Glied der dreiteiligen Namensform (tria nomina) männlicher römischer"| __truncated__
+#>   ..$ random_article  : chr "Adelheid von Sachsen-Meiningen (1792–1849)"
+#>   ..$ first_link_title: chr "13. August"
+#>   ..$ first_link_text : chr "Der 13. August ist der 225. Tag des gregorianischen Kalenders (der 226. in Schaltjahren), somit bleiben 140 Tag"| __truncated__
 #>  $ 20:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Bernhard Weisser"
-#>   ..$ first_link_title: chr "1964"
-#>   ..$ first_link_text : chr "Einträge von Leichtathletik-Weltrekorden siehe unter der jeweiligen Disziplin unter Leichtathletik."
+#>   ..$ random_article  : chr "Die Neunte Kompanie"
+#>   ..$ first_link_title: chr "Fjodor Sergejewitsch Bondartschuk"
+#>   ..$ first_link_text : chr "Fjodor Sergejewitsch Bondartschuk (russisch <U+0424><U+0451><U+0434><U+043E><U+0440> <U+0421><U+0435><U+0440><U"| __truncated__
 str(wiki_text[["not_scraped"]])
 #>  NULL
 ```
