@@ -16,7 +16,10 @@ knitr::opts_chunk$set(
 # parsel
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/till-tietz/parsel/workflows/R-CMD-check/badge.svg)](https://github.com/till-tietz/parsel/actions)
 <!-- badges: end -->
+
+badgecreatr::badgeplacer()
 
 parsel parallelizes the execution of RSelenium. It allows you to easily and conveniently run multiple RSelenium browsers simultaneously 
 to speed up your dynamic web scraping jobs.   
