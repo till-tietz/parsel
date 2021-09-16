@@ -6,8 +6,6 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/till-tietz/parsel/workflows/R-CMD-check/badge.svg)](https://github.com/till-tietz/parsel/actions)
-[![Codecov test
-coverage](https://codecov.io/gh/till-tietz/parsel/branch/master/graph/badge.svg)](https://codecov.io/gh/till-tietz/parsel?branch=master)
 <!-- badges: end -->
 
 parsel parallelizes the execution of RSelenium. It allows you to easily
@@ -136,85 +134,85 @@ parsel returns a list with two elements:
 str(wiki_text[["scraped_results"]])
 #> List of 20
 #>  $ 1 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Borcke (Familienname)"
+#>   ..$ random_article  : chr "Pfarrkirche Gorentschach"
+#>   ..$ first_link_title: chr "Römisch-katholische Kirche"
+#>   ..$ first_link_text : chr "Die römisch-katholische Kirche („katholisch“ von griechisch <U+03BA>a<U+03B8><U+03BF><U+03BB><U+03B9><U+03BA><U"| __truncated__
+#>  $ 2 :'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "The Return of Bruno"
+#>   ..$ first_link_title: chr "Musikalbum"
+#>   ..$ first_link_text : chr "Ein Musikalbum (auch kurz Album) ist in der Musikindustrie die Bezeichnung für eine vom Tonträger unabhängige Z"| __truncated__
+#>  $ 3 :'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "Driss Guiga"
+#>   ..$ first_link_title: chr "Arabische Sprache"
+#>   ..$ first_link_text : chr "Die arabische Sprache (kurz Arabisch; Eigenbezeichnung <U+0627><U+064E><U+0644><U+0644><U+064F><U+0651><U+063A>"| __truncated__
+#>  $ 4 :'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "Liste der Lokomotiven und Triebwagen der BBÖ"
 #>   ..$ first_link_title: logi NA
 #>   ..$ first_link_text : logi NA
-#>  $ 2 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Douze"
-#>   ..$ first_link_title: chr "Frankreich"
-#>   ..$ first_link_text : chr "Frankreich  ['f<U+0281>a<U+014B>k<U+0281>a<U+026A><U+032F>ç] (französisch France?/i [f<U+0281><U+0251>~s], amtl"| __truncated__
-#>  $ 3 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Liste der Kulturdenkmäler in Wörth am Rhein"
-#>   ..$ first_link_title: chr "Kulturdenkmal"
-#>   ..$ first_link_text : chr "Ein Kulturdenkmal ist im allgemeinen Sprachgebrauch laut Duden ein Objekt oder Werk, „das als Zeugnis einer Kul"| __truncated__
-#>  $ 4 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Hot Spring County"
-#>   ..$ first_link_title: chr "County (Vereinigte Staaten)"
-#>   ..$ first_link_text : chr "Ein County (das oder die County, Plural: englisch counties, deutsch Countys) ist in 48 der 50 Bundesstaaten der"| __truncated__
 #>  $ 5 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Långe Erik"
-#>   ..$ first_link_title: chr "Leuchtturm"
-#>   ..$ first_link_text : chr "Als Leuchtturm wird ein Turm bezeichnet, der eine Befeuerung trägt. Leuchttürme sind insbesondere nachts weithi"| __truncated__
+#>   ..$ random_article  : chr "Mersea Island"
+#>   ..$ first_link_title: logi NA
+#>   ..$ first_link_text : logi NA
 #>  $ 6 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Tischtennisweltmeisterschaft 1983"
-#>   ..$ first_link_title: chr "28. April"
-#>   ..$ first_link_text : chr "Der 28. April ist der 118. Tag des gregorianischen Kalenders (der 119. in Schaltjahren), somit verbleiben 247 T"| __truncated__
+#>   ..$ random_article  : chr "Tjautjas"
+#>   ..$ first_link_title: chr "Nordsamische Sprache"
+#>   ..$ first_link_text : chr "Nordsamisch (auch Saamisch, Sámi; Eigenbezeichnung davvisámegiella) ist die mit Abstand größte Sprache aus der "| __truncated__
 #>  $ 7 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Opuntien-Grundfink"
-#>   ..$ first_link_title: chr "Singvögel"
-#>   ..$ first_link_text : chr "Die Singvögel (Passeri oder auch Oscines) sind in der Ornithologie eine Unterordnung der Sperlingsvögel (Passer"| __truncated__
+#>   ..$ random_article  : chr "Varkaus"
+#>   ..$ first_link_title: chr "Gemeinde (Finnland)"
+#>   ..$ first_link_text : chr "Die Gemeinden (finnisch kunta, schwedisch kommun; auch als ‚Kommune‘ übersetzt) bilden in Finnland die lokale E"| __truncated__
 #>  $ 8 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Thomas Placidus Fleming"
+#>   ..$ random_article  : chr "Barnabas der Vampir"
+#>   ..$ first_link_title: chr "„William Edward Daniel Ross“ – Erstellen"
+#>   ..$ first_link_text : logi NA
+#>  $ 9 :'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "Tower Hill (London Underground)"
+#>   ..$ first_link_title: chr "U-Bahnhof"
+#>   ..$ first_link_text : chr "Als U-Bahnhof (alternativ auch U-Bahn-Station oder U-Bahn-Haltestelle, abgekürzt U-Bf., U-Bhf. oder U-Hst.) wer"| __truncated__
+#>  $ 10:'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "Seyhan Derin"
+#>   ..$ first_link_title: chr "1. Juli"
+#>   ..$ first_link_text : chr "Der 1. Juli ist der 182. Tag des gregorianischen Kalenders (der 183. in Schaltjahren), somit bleiben 183 Tage b"| __truncated__
+#>  $ 11:'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "Kirill Gennadjewitsch Prigoda"
+#>   ..$ first_link_title: chr "29. Dezember"
+#>   ..$ first_link_text : chr "Der 29. Dezember ist der 363. Tag des gregorianischen Kalenders (der 364. in Schaltjahren), somit bleiben 2 Tag"| __truncated__
+#>  $ 12:'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "Veronika Olbrich"
+#>   ..$ first_link_title: chr "1. September"
+#>   ..$ first_link_text : chr "Der 1. September ist der 244. Tag des gregorianischen Kalenders (der 245. in Schaltjahren), somit bleiben noch "| __truncated__
+#>  $ 13:'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "Liste von Seehäfen"
+#>   ..$ first_link_title: chr "Seehafen"
+#>   ..$ first_link_text : chr "Ein Seehafen ist ein Hafen, der von Seeschiffen angelaufen werden kann. Seehäfen können an der Küste, an Flüsse"| __truncated__
+#>  $ 14:'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "Hudson Hoagland"
+#>   ..$ first_link_title: chr "5. Dezember"
+#>   ..$ first_link_text : chr "Der 5. Dezember ist der 339. Tag des gregorianischen Kalenders (der 340. in Schaltjahren), somit bleiben 26 Tag"| __truncated__
+#>  $ 15:'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "Stefan Bogoridi"
+#>   ..$ first_link_title: logi NA
+#>   ..$ first_link_text : logi NA
+#>  $ 16:'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "Agesipolis I."
+#>   ..$ first_link_title: chr "Pausanias (König)"
+#>   ..$ first_link_text : chr "Pausanias (altgriechisch <U+03A0>a<U+03C5>sa<U+03BD><U+03AF>a<U+03C2> Pausanías) war ein König von Sparta aus d"| __truncated__
+#>  $ 17:'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "Codes im Neuromarketing"
+#>   ..$ first_link_title: chr "Neuromarketing"
+#>   ..$ first_link_text : chr ""
+#>  $ 18:'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "Her First Adventure"
+#>   ..$ first_link_title: chr "Vereinigte Staaten"
+#>   ..$ first_link_text : chr "Die Vereinigten Staaten von Amerika (englisch United States of America; abgekürzt USA), kurz Vereinigte Staaten"| __truncated__
+#>  $ 19:'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "Absperrhahn"
+#>   ..$ first_link_title: chr "Armatur"
+#>   ..$ first_link_text : chr "Eine Armatur (lateinisch armare „ausrüsten“) in Sanitärtechnik und Anlagenbau bezeichnet ein Bauteil zum Veränd"| __truncated__
+#>  $ 20:'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "August Brehm"
 #>   ..$ first_link_title: chr "15. Oktober"
 #>   ..$ first_link_text : chr "Der 15. Oktober ist der 288. Tag des gregorianischen Kalenders (der 289. in Schaltjahren), somit bleiben 77 Tag"| __truncated__
-#>  $ 9 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Chassanbi Urusbijewitsch Taow"
-#>   ..$ first_link_title: chr "5. November"
-#>   ..$ first_link_text : chr "Der 5. November ist der 309. Tag des gregorianischen Kalenders (der 310. in Schaltjahren), somit bleiben 56 Tag"| __truncated__
-#>  $ 10:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Joseph Michel (Komponist)"
-#>   ..$ first_link_title: chr "1679"
-#>   ..$ first_link_text : chr "Wien wird von einer Pestepidemie heimgesucht. Die Legende des lieben Augustin entsteht. Auf der Flucht aus der "| __truncated__
-#>  $ 11:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "AFC Cup 2009"
-#>   ..$ first_link_title: chr "Asian Football Confederation"
-#>   ..$ first_link_text : chr "Die Asian Football Confederation (dt.: Asiatische Fußball-Konföderation), auch AFC, ist der asiatische Fußballv"| __truncated__
-#>  $ 12:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Giacinto Cornacchioli"
-#>   ..$ first_link_title: chr "1599"
-#>   ..$ first_link_text : logi NA
-#>  $ 13:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Sajzy"
-#>   ..$ first_link_title: chr "Deutsche Sprache"
-#>   ..$ first_link_text : chr "Die deutsche Sprache bzw. das Deutsche ([d<U+0254><U+026A><U+032F>t<U+0283>];[26] abgekürzt dt. oder dtsch.) is"| __truncated__
-#>  $ 14:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Josef Wolfsberger"
-#>   ..$ first_link_title: chr "5. Juli"
-#>   ..$ first_link_text : chr "Der 5. Juli ist der 186. Tag des gregorianischen Kalenders (der 187. in Schaltjahren), somit bleiben 179 Tage b"| __truncated__
-#>  $ 15:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Communauté de communes du Pays d’Argentat"
-#>   ..$ first_link_title: chr "Frankreich"
-#>   ..$ first_link_text : chr "Frankreich  ['f<U+0281>a<U+014B>k<U+0281>a<U+026A><U+032F>ç] (französisch France?/i [f<U+0281><U+0251>~s], amtl"| __truncated__
-#>  $ 16:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Lao Army FC"
-#>   ..$ first_link_title: chr "Laos"
-#>   ..$ first_link_text : chr "Laos (['la<U+02D0><U+0254>s], laotisch <U+0E9B><U+0EB0><U+0EC0><U+0E97><U+0E94><U+0EA5><U+0EB2><U+0EA7>, amtlic"| __truncated__
-#>  $ 17:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Michel Poffet (Fechter)"
-#>   ..$ first_link_title: chr "24. August"
-#>   ..$ first_link_text : chr "Der 24. August ist der 236. Tag des gregorianischen Kalenders (der 237. in Schaltjahren), somit bleiben 129 Tag"| __truncated__
-#>  $ 18:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Juri Michailowitsch Swirin"
-#>   ..$ first_link_title: chr "29. Januar"
-#>   ..$ first_link_text : chr "Der 29. Januar (in Österreich und Südtirol: 29. Jänner) ist der 29. Tag des gregorianischen Kalenders, somit bl"| __truncated__
-#>  $ 19:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Brenham"
-#>   ..$ first_link_title: chr "County Seat"
-#>   ..$ first_link_text : chr "Ein County Seat ist der Verwaltungssitz eines Countys in den Vereinigten Staaten und in Kanada."
-#>  $ 20:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Léon Taverdet"
-#>   ..$ first_link_title: chr "17. Juli"
-#>   ..$ first_link_text : chr "Der 17. Juli ist der 198. Tag des gregorianischen Kalenders (der 199. in Schaltjahren), somit bleiben noch 167 "| __truncated__
 str(wiki_text[["not_scraped"]])
 #>  NULL
 ```
