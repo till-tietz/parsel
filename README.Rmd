@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/till-tietz/parsel/workflows/R-CMD-check/badge.svg)](https://github.com/till-tietz/parsel/actions)
+[![Codecov test coverage](https://codecov.io/gh/till-tietz/parsel/branch/master/graph/badge.svg)](https://codecov.io/gh/till-tietz/parsel?branch=master)
 <!-- badges: end -->
 
 parsel parallelizes the execution of RSelenium. It allows you to easily and conveniently run multiple RSelenium browsers simultaneously 
