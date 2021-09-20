@@ -7,10 +7,11 @@
 #' @param ports vector of ports for RSelenium instances (if left at default NULL parscrape will randomly generate ports)
 #' @param chunk_size number of scrape_input elements to be processed per round of scrape_function (parscrape splits scrape_input into chunks and runs scrape_function in multiple rounds to avoid loosing data due to errors). Defaults to number of cores.
 #' @param scrape_tries sets number of times parscrape will re-try to scrape a chunk when encountering an error
+#' @param proxy a proxy setting function that runs before scraping each chunk
 #' @return list with output of scrape_fun in "scraped_results" and a vector of indices of scrape_input elements that could not be scraped in "not_scaped"
 #' @export
 
-parscrape <- function(scrape_fun, scrape_input, cores, packages = c("base"), browser, ports = NULL, chunk_size = NULL, scrape_tries = 2){
+parscrape <- function(scrape_fun, scrape_input, cores, packages = c("base"), browser, ports = NULL, chunk_size = NULL, scrape_tries = 2, proxy = NULL){
 
   if(missing(scrape_fun)){
     stop("missing scrape_fun")
@@ -99,9 +100,15 @@ parscrape <- function(scrape_fun, scrape_input, cores, packages = c("base"), bro
 
   for(i in c(1:length(result_list))){
     init[i] <- Sys.time()
+
+    if(!is.null(proxy)){
+      proxy()
+    }
+
     chunk_i <- chunks[[i]]
     input_i <- scrape_input[chunk_i]
     n_tries <- 0
+
     while(TRUE){
       scrape_out <- try(parallel::parLapply(clust, input_i, scrape_fun), silent=TRUE)
       n_tries <- n_tries + 1
