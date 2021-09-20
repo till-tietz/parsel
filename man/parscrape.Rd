@@ -12,7 +12,8 @@ parscrape(
   browser,
   ports = NULL,
   chunk_size = NULL,
-  scrape_tries = 2
+  scrape_tries = 2,
+  proxy = NULL
 )
 }
 \arguments{
@@ -31,6 +32,8 @@ parscrape(
 \item{chunk_size}{number of scrape_input elements to be processed per round of scrape_function (parscrape splits scrape_input into chunks and runs scrape_function in multiple rounds to avoid loosing data due to errors). Defaults to number of cores.}
 
 \item{scrape_tries}{sets number of times parscrape will re-try to scrape a chunk when encountering an error}
+
+\item{proxy}{a proxy setting function that runs before scraping each chunk}
 }
 \value{
 list with output of scrape_fun in "scraped_results" and a vector of indices of scrape_input elements that could not be scraped in "not_scaped"
