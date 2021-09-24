@@ -49,12 +49,12 @@ parscrape <- function(scrape_fun, scrape_input, cores, packages = c("base"), bro
     stop("scrape_tries not numeric")
   }
 
-  if(is.null(ports)){
-    ports <- sample(1000:9999, cores, replace = FALSE)
-  }
-
   if(is.null(cores)){
     cores <- parallel::detectCores() - 1
+  }
+
+  if(is.null(ports)){
+    ports <- sample(1000:9999, cores, replace = FALSE)
   }
 
   if(is.null(chunk_size)){
