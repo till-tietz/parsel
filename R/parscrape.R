@@ -11,7 +11,7 @@
 #' @return list with output of scrape_fun in "scraped_results" and a vector of indices of scrape_input elements that could not be scraped in "not_scaped"
 #' @export
 
-parscrape <- function(scrape_fun, scrape_input, cores, packages = c("base"), browser, ports = NULL, chunk_size = NULL, scrape_tries = 2, proxy = NULL){
+parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base"), browser, ports = NULL, chunk_size = NULL, scrape_tries = 2, proxy = NULL){
 
   if(missing(scrape_fun)){
     stop("missing scrape_fun")

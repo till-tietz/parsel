@@ -7,7 +7,7 @@
 parscrape(
   scrape_fun,
   scrape_input,
-  cores,
+  cores = NULL,
   packages = c("base"),
   browser,
   ports = NULL,
