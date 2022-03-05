@@ -1,6 +1,6 @@
 Package: parsel
 Type: Package
-Title: Prallelized Web Scraping With Rselenium
+Title: parallel execution of RSelenium
 Version: 0.1.0
 Author: Till Tietz
 Maintainer: Till Tietz <ttietz2014@gmail.com>
