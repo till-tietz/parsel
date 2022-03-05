@@ -4,14 +4,14 @@ Title: parallel execution of RSelenium
 Version: 0.1.0
 Author: Till Tietz
 Maintainer: Till Tietz <ttietz2014@gmail.com>
-Description: Speed up your RSelenium webscraping by scraping on multiple browsers 
+Description: Speed up RSelenium webscraping by scraping on multiple browsers 
     simultaniously. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
     parallel (>= 3.6.2),
-    RSelenium (>= 1.7.7),
+    RSelenium,
     lubridate (>= 1.7.9),
     utils (>= 2.10.1),
     methods (>= 3.3.1)
@@ -20,6 +20,6 @@ Suggests:
     rmarkdown,
     knitr,
     testthat (>= 3.0.0),
-    covr
+    covr (>= 3.5.1)
 VignetteBuilder: knitr
 Config/testthat/edition: 3

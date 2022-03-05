@@ -7,4 +7,3 @@
 ## usethis namespace: end
 
 utils::globalVariables(c("rD","remDr","clust"))
-
