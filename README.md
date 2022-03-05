@@ -8,13 +8,13 @@
 [![R-CMD-check](https://github.com/till-tietz/parsel/workflows/R-CMD-check/badge.svg)](https://github.com/till-tietz/parsel/actions)
 <!-- badges: end -->
 
-parsel parallelizes the execution of RSelenium. It allows you to easily
-and conveniently run multiple RSelenium browsers simultaneously to speed
-up your dynamic web scraping jobs.
+`parsel` is a framework for parallel execution of RSelenium. It allows
+you to easily and conveniently run multiple RSelenium browsers
+simultaneously to speed up your dynamic web scraping jobs.
 
 ## Installation
 
-You can install the development version of parsel from
+You can install the development version of `parsel` from
 [GitHub](https://github.com/) with:
 
 ``` r
@@ -24,18 +24,18 @@ devtools::install_github("till-tietz/parsel")
 
 ## Example
 
-The following quick (and slightly silly) example will hopefully serve to
-illustrate the functions and ideas behind how parsel operates. We’ll set
-up the following scraping job:
+The following toy example will hopefully serve to illustrate the
+functions and ideas behind how `parsel` operates. We’ll set up the
+following scraping job:
 
 1.  navigate to a random wikipedia article
 2.  retrieve its title
 3.  navigate to the first linked page on the article
 4.  retrieve the linked page’s title and first section
 
-and parallelize it with parsel.
+and parallelize it with `parsel`.
 
-parsel requires two things:
+`parsel` requires two things:
 
 1.  some scraping function defining the actions to be executed in each
     RSelenium instance
@@ -134,85 +134,85 @@ parsel returns a list with two elements:
 str(wiki_text[["scraped_results"]])
 #> List of 20
 #>  $ 1 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Pfarrkirche Gorentschach"
-#>   ..$ first_link_title: chr "Römisch-katholische Kirche"
-#>   ..$ first_link_text : chr "Die römisch-katholische Kirche („katholisch“ von griechisch <U+03BA>a<U+03B8><U+03BF><U+03BB><U+03B9><U+03BA><U"| __truncated__
+#>   ..$ random_article  : chr "Wat Rachathiwat"
+#>   ..$ first_link_title: chr "Thailändische Sprache"
+#>   ..$ first_link_text : chr "Die thailändische Sprache (das Thai, <U+0E20><U+0E32><U+0E29><U+0E32><U+0E44><U+0E17><U+0E22> – gesprochen: [p<"| __truncated__
 #>  $ 2 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "The Return of Bruno"
-#>   ..$ first_link_title: chr "Musikalbum"
-#>   ..$ first_link_text : chr "Ein Musikalbum (auch kurz Album) ist in der Musikindustrie die Bezeichnung für eine vom Tonträger unabhängige Z"| __truncated__
+#>   ..$ random_article  : chr "Michel Graeff"
+#>   ..$ first_link_title: chr "11. März"
+#>   ..$ first_link_text : chr "Der 11. März ist der 70. Tag des gregorianischen Kalenders (der 71. in Schaltjahren), somit bleiben 295 Tage bi"| __truncated__
 #>  $ 3 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Driss Guiga"
-#>   ..$ first_link_title: chr "Arabische Sprache"
-#>   ..$ first_link_text : chr "Die arabische Sprache (kurz Arabisch; Eigenbezeichnung <U+0627><U+064E><U+0644><U+0644><U+064F><U+0651><U+063A>"| __truncated__
+#>   ..$ random_article  : chr "Martin Hackleman"
+#>   ..$ first_link_title: chr "1952"
+#>   ..$ first_link_text : chr "Das Jahr 1952 war geprägt von dem weiterhin andauernden Koreakrieg. In Europa wird mit der Montanunion die Grun"| __truncated__
 #>  $ 4 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Liste der Lokomotiven und Triebwagen der BBÖ"
-#>   ..$ first_link_title: logi NA
-#>   ..$ first_link_text : logi NA
+#>   ..$ random_article  : chr "Cela (Angola)"
+#>   ..$ first_link_title: chr "Angola"
+#>   ..$ first_link_text : chr "Angola (deutsch [a<U+014B>'go<U+02D0>la], portugiesisch [<U+0250><U+014B>'g<U+0254>l<U+0250>]; auf Kimbundu, Um"| __truncated__
 #>  $ 5 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Mersea Island"
-#>   ..$ first_link_title: logi NA
-#>   ..$ first_link_text : logi NA
+#>   ..$ random_article  : chr "Yamatanoorochi"
+#>   ..$ first_link_title: chr "Kojiki"
+#>   ..$ first_link_text : chr "Das Kojiki (jap. <U+53E4><U+4E8B><U+8A18>, dt. „Aufzeichnung alter Geschehnisse“), selten auch in Kun-Lesung Fu"| __truncated__
 #>  $ 6 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Tjautjas"
-#>   ..$ first_link_title: chr "Nordsamische Sprache"
-#>   ..$ first_link_text : chr "Nordsamisch (auch Saamisch, Sámi; Eigenbezeichnung davvisámegiella) ist die mit Abstand größte Sprache aus der "| __truncated__
+#>   ..$ random_article  : chr "Helmut Reuter"
+#>   ..$ first_link_title: chr "9. August"
+#>   ..$ first_link_text : chr "Der 9. August ist der 221. Tag des gregorianischen Kalenders (der 222. in Schaltjahren), somit bleiben 144 Tage"| __truncated__
 #>  $ 7 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Varkaus"
-#>   ..$ first_link_title: chr "Gemeinde (Finnland)"
-#>   ..$ first_link_text : chr "Die Gemeinden (finnisch kunta, schwedisch kommun; auch als ‚Kommune‘ übersetzt) bilden in Finnland die lokale E"| __truncated__
-#>  $ 8 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Barnabas der Vampir"
-#>   ..$ first_link_title: chr "„William Edward Daniel Ross“ – Erstellen"
-#>   ..$ first_link_text : logi NA
-#>  $ 9 :'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Tower Hill (London Underground)"
-#>   ..$ first_link_title: chr "U-Bahnhof"
-#>   ..$ first_link_text : chr "Als U-Bahnhof (alternativ auch U-Bahn-Station oder U-Bahn-Haltestelle, abgekürzt U-Bf., U-Bhf. oder U-Hst.) wer"| __truncated__
-#>  $ 10:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Seyhan Derin"
-#>   ..$ first_link_title: chr "1. Juli"
-#>   ..$ first_link_text : chr "Der 1. Juli ist der 182. Tag des gregorianischen Kalenders (der 183. in Schaltjahren), somit bleiben 183 Tage b"| __truncated__
-#>  $ 11:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Kirill Gennadjewitsch Prigoda"
-#>   ..$ first_link_title: chr "29. Dezember"
-#>   ..$ first_link_text : chr "Der 29. Dezember ist der 363. Tag des gregorianischen Kalenders (der 364. in Schaltjahren), somit bleiben 2 Tag"| __truncated__
-#>  $ 12:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Veronika Olbrich"
-#>   ..$ first_link_title: chr "1. September"
-#>   ..$ first_link_text : chr "Der 1. September ist der 244. Tag des gregorianischen Kalenders (der 245. in Schaltjahren), somit bleiben noch "| __truncated__
-#>  $ 13:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Liste von Seehäfen"
-#>   ..$ first_link_title: chr "Seehafen"
-#>   ..$ first_link_text : chr "Ein Seehafen ist ein Hafen, der von Seeschiffen angelaufen werden kann. Seehäfen können an der Küste, an Flüsse"| __truncated__
-#>  $ 14:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Hudson Hoagland"
-#>   ..$ first_link_title: chr "5. Dezember"
-#>   ..$ first_link_text : chr "Der 5. Dezember ist der 339. Tag des gregorianischen Kalenders (der 340. in Schaltjahren), somit bleiben 26 Tag"| __truncated__
-#>  $ 15:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Stefan Bogoridi"
+#>   ..$ random_article  : chr "Nekrolog 1482"
 #>   ..$ first_link_title: logi NA
 #>   ..$ first_link_text : logi NA
-#>  $ 16:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Agesipolis I."
-#>   ..$ first_link_title: chr "Pausanias (König)"
-#>   ..$ first_link_text : chr "Pausanias (altgriechisch <U+03A0>a<U+03C5>sa<U+03BD><U+03AF>a<U+03C2> Pausanías) war ein König von Sparta aus d"| __truncated__
-#>  $ 17:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Codes im Neuromarketing"
-#>   ..$ first_link_title: chr "Neuromarketing"
+#>  $ 8 :'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "Unified Memory Architecture"
+#>   ..$ first_link_title: chr "Prozessor"
 #>   ..$ first_link_text : chr ""
+#>  $ 9 :'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "Alexandre Emery"
+#>   ..$ first_link_title: chr "9. März"
+#>   ..$ first_link_text : chr "Der 9. März ist der 68. Tag des gregorianischen Kalenders (der 69. in Schaltjahren), somit bleiben 297 Tage bis"| __truncated__
+#>  $ 10:'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "Split"
+#>   ..$ first_link_title: chr "Kroatien"
+#>   ..$ first_link_text : chr "Kroatien (kroatisch Hrvatska?/i [xr<U+0329><U+028B>a<U+02D0>tska<U+02D0>], amtlich Republik Kroatien, kroatisch"| __truncated__
+#>  $ 11:'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "Kreis Kalocsa"
+#>   ..$ first_link_title: chr "Komitat Bács-Kiskun"
+#>   ..$ first_link_text : chr "Bács-Kiskun ['ba<U+02D0><U+02A7> 'ki<U+0283>kun] ist ein Komitat (Verwaltungsbezirk) in Südungarn. Es grenzt an"| __truncated__
+#>  $ 12:'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "Salomon David Steinberg"
+#>   ..$ first_link_title: chr "25. Juni"
+#>   ..$ first_link_text : chr "Der 25. Juni ist der 176. Tag des gregorianischen Kalenders (der 177. in Schaltjahren), somit verbleiben noch 1"| __truncated__
+#>  $ 13:'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "Somewhere in My Memory"
+#>   ..$ first_link_title: chr "John Williams (Komponist)"
+#>   ..$ first_link_text : chr "John Towner Williams (* 8. Februar 1932 in Flushing, Queens, New York City, New York) ist ein US-amerikanischer"| __truncated__
+#>  $ 14:'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "Landkreis Bitterfeld (Provinz Sachsen)"
+#>   ..$ first_link_title: chr "Landkreis"
+#>   ..$ first_link_text : chr "Ein Landkreis (abgekürzt: Lk, Lkr, Lkrs oder Landkrs.) oder Kreis (abgekürzt: Kr) ist nach deutschem Kommunalre"| __truncated__
+#>  $ 15:'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "Maria Collm"
+#>   ..$ first_link_title: chr "2. Juli"
+#>   ..$ first_link_text : chr "Der 2. Juli ist der 183. Tag des gregorianischen Kalenders (der 184. in Schaltjahren), somit bleiben 182 Tage b"| __truncated__
+#>  $ 16:'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "FSV Oppenheim"
+#>   ..$ first_link_title: chr "Oppenheim"
+#>   ..$ first_link_text : chr "Oppenheim ist eine Stadt am Oberrhein im Landkreis Mainz-Bingen, Rheinland-Pfalz. Sie ist Verwaltungssitz der V"| __truncated__
+#>  $ 17:'data.frame':  1 obs. of  3 variables:
+#>   ..$ random_article  : chr "Leo Weber (Politiker)"
+#>   ..$ first_link_title: chr "24. Juni"
+#>   ..$ first_link_text : chr "Der 24. Juni ist der 175. Tag des gregorianischen Kalenders (der 176. in Schaltjahren), somit verbleiben noch 1"| __truncated__
 #>  $ 18:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Her First Adventure"
-#>   ..$ first_link_title: chr "Vereinigte Staaten"
-#>   ..$ first_link_text : chr "Die Vereinigten Staaten von Amerika (englisch United States of America; abgekürzt USA), kurz Vereinigte Staaten"| __truncated__
+#>   ..$ random_article  : chr "Ture (Name)"
+#>   ..$ first_link_title: chr "Nordgermanische Sprachen"
+#>   ..$ first_link_text : chr "Die nordgermanischen Sprachen (auch skandinavische oder nordische Sprachen genannt) umfassen die Sprachen Islän"| __truncated__
 #>  $ 19:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "Absperrhahn"
-#>   ..$ first_link_title: chr "Armatur"
-#>   ..$ first_link_text : chr "Eine Armatur (lateinisch armare „ausrüsten“) in Sanitärtechnik und Anlagenbau bezeichnet ein Bauteil zum Veränd"| __truncated__
+#>   ..$ random_article  : chr "Palais Minucci"
+#>   ..$ first_link_title: chr "Palast"
+#>   ..$ first_link_text : chr "Ein Palast ist ein in einer Stadt erbauter, schlossähnlicher und repräsentativer Prachtbau. Der Begriff „Palast"| __truncated__
 #>  $ 20:'data.frame':  1 obs. of  3 variables:
-#>   ..$ random_article  : chr "August Brehm"
-#>   ..$ first_link_title: chr "15. Oktober"
-#>   ..$ first_link_text : chr "Der 15. Oktober ist der 288. Tag des gregorianischen Kalenders (der 289. in Schaltjahren), somit bleiben 77 Tag"| __truncated__
+#>   ..$ random_article  : chr "Piers Sellers"
+#>   ..$ first_link_title: chr "11. April"
+#>   ..$ first_link_text : chr "Der 11. April ist der 101. Tag des gregorianischen Kalenders (der 102. in Schaltjahren), somit bleiben 264 Tage"| __truncated__
 str(wiki_text[["not_scraped"]])
 #>  NULL
 ```
