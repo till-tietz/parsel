@@ -4,7 +4,7 @@ Title: parallel execution of RSelenium
 Version: 0.1.0
 Author: Till Tietz
 Maintainer: Till Tietz <ttietz2014@gmail.com>
-Description: Speed up your RSelenium webscraping by scraping on multiple browsers 
+Description: Speed up RSelenium webscraping by scraping on multiple browsers 
     simultaniously. 
 License: MIT + file LICENSE
 Encoding: UTF-8
