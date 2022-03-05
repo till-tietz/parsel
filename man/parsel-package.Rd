@@ -4,9 +4,9 @@
 \name{parsel-package}
 \alias{parsel}
 \alias{parsel-package}
-\title{parsel: Prallelized Web Scraping With Rselenium}
+\title{parsel: parallel execution of RSelenium}
 \description{
-Speed up your RSelenium webscraping by scraping on multiple browsers 
+Speed up RSelenium webscraping by scraping on multiple browsers 
     simultaniously.
 }
 \keyword{internal}

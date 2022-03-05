@@ -11,7 +11,7 @@ Encoding: UTF-8
 LazyData: true
 Imports: 
     parallel (>= 3.6.2),
-    RSelenium (>= 1.7.7),
+    RSelenium (1.7.7),
     lubridate (>= 1.7.9),
     utils (>= 2.10.1),
     methods (>= 3.3.1)
