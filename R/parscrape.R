@@ -63,18 +63,18 @@ parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base
 
   ports <- as.list(ports)
 
+  pos <- 1
+  envir = as.environment(pos)
+
   clust <- parallel::makeCluster(cores)
 
   parallel::clusterApply(clust, ports, function(x){
 
     lapply(packages, require, character.only = TRUE)
 
-    rD <<- RSelenium::rsDriver(
-      browser = browser,
-      port = x
-    )
+    assign("rD", RSelenium::rsDriver(browser = browser, port = x), envir = envir)
+    assign("remDr", rD[["client"]], envir = envir)
 
-    remDr <<- rD[["client"]]
   })
 
   if(!is.list(scrape_input)){
