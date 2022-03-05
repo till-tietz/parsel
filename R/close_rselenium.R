@@ -8,3 +8,5 @@ close_rselenium <- function(){
   })
   system("taskkill /im java.exe /f", intern = FALSE, ignore.stdout = FALSE)
 }
+
+
