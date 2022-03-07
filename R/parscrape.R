@@ -11,97 +11,100 @@
 #' @return list with output of scrape_fun in "scraped_results" and a vector of indices of scrape_input elements that could not be scraped in "not_scaped"
 #' @export
 
-parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base"), browser, ports = NULL, chunk_size = NULL, scrape_tries = 2, proxy = NULL){
-
-  if(missing(scrape_fun)){
+parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base"), browser, ports = NULL, chunk_size = NULL, scrape_tries = 1, proxy = NULL) {
+  if (missing(scrape_fun)) {
     stop("missing scrape_fun")
   }
 
-  if(!is.function(scrape_fun)){
+  if (!is.function(scrape_fun)) {
     stop("scrape_fun is not a function")
   }
 
-  if(missing(scrape_input)){
+  if (missing(scrape_input)) {
     stop("missing scrape_input")
   }
 
-  if(missing(cores)){
+  if (missing(cores)) {
     stop("missing cores")
   }
 
-  if(!is.numeric(cores)){
-    stop("cores is not numeric")
-  }
-
-  if(missing(packages)){
-    stop("missing packages")
-  }
-
-  if(missing(browser)){
-    stop("missing browser")
-  }
-
-  if(missing(scrape_tries)){
-    stop("missing scrape_tries")
-  }
-
-  if(!is.numeric(scrape_tries)){
-    stop("scrape_tries not numeric")
-  }
-
-  if(is.null(cores)){
+  if (is.null(cores)) {
     cores <- parallel::detectCores() - 1
   }
 
-  if(is.null(ports)){
+  if (!is.null(cores) & !is.numeric(cores)) {
+    stop("cores is not numeric")
+  }
+
+  if (missing(packages)) {
+    stop("missing packages")
+  }
+
+  if (missing(browser)) {
+    stop("missing browser")
+  }
+
+  if (missing(scrape_tries)) {
+    stop("missing scrape_tries")
+  }
+
+  if (!is.numeric(scrape_tries)) {
+    stop("scrape_tries not numeric")
+  }
+
+  if (is.null(ports)) {
     ports <- sample(1000:9999, cores, replace = FALSE)
   }
 
-  if(is.null(chunk_size)){
+  if (is.null(chunk_size)) {
     chunk_size <- cores
+  }
+
+  if(!is.numeric(chunk_size)){
+    stop("chunk size not numeric")
   }
 
   ports <- as.list(ports)
 
   pos <- 1
-  envir = as.environment(pos)
+  envir <- as.environment(pos)
 
   clust <- parallel::makeCluster(cores)
 
-  parallel::clusterApply(clust, ports, function(x){
-
+  parallel::clusterApply(clust, ports, function(x) {
     lapply(packages, require, character.only = TRUE)
 
     assign("rD", RSelenium::rsDriver(browser = browser, port = x), envir = envir)
     assign("remDr", rD[["client"]], envir = envir)
-
   })
 
-  if(!is.list(scrape_input)){
-    if(is.vector(scrape_input)){
+  if (!is.list(scrape_input)) {
+    if (is.vector(scrape_input)) {
       scrape_input <- split(scrape_input, seq(length(scrape_input)))
     }
   } else {
-    if(is.data.frame(scrape_input)){
+    if (is.data.frame(scrape_input)) {
       scrape_input <- split(scrape_input, seq(nrow(scrape_input)))
     }
   }
 
-  chunks <- split(c(1:length(scrape_input)), ceiling(seq_along(c(1:length(scrape_input)))/chunk_size))
+  chunks <- split(c(1:length(scrape_input)), ceiling(seq_along(c(1:length(scrape_input))) / chunk_size))
 
   result_list <- vector(mode = "list", length = length(chunks))
   lres <- length(result_list)
 
-  pb <- txtProgressBar(min = 0, max = lres, style = 3,
-                       width = lres, char = "=")
+  pb <- txtProgressBar(
+    min = 0, max = lres, style = 3,
+    width = lres, char = "="
+  )
 
   init <- numeric(lres)
   end <- numeric(lres)
 
-  for(i in c(1:length(result_list))){
+  for (i in c(1:length(result_list))) {
     init[i] <- Sys.time()
 
-    if(!is.null(proxy)){
+    if (!is.null(proxy)) {
       proxy()
     }
 
@@ -109,22 +112,28 @@ parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base
     input_i <- scrape_input[chunk_i]
     n_tries <- 0
 
-    while(TRUE){
-      scrape_out <- try(parallel::parLapply(clust, input_i, scrape_fun), silent=TRUE)
+    while (TRUE) {
+      scrape_out <- try(parallel::parLapply(clust, input_i, scrape_fun), silent = TRUE)
       n_tries <- n_tries + 1
-      if(!is(scrape_out, 'try-error')){
+      if (!is(scrape_out, "try-error")) {
         break
       }
-      if(n_tries == scrape_tries){
-        warning(paste(paste("parsel encountered the following ERROR while trying to scrape chunk", i, sep = " "), ":", sep = ""),
-                scrape_out[1],
-                "check under not_scraped of this function's output for the indices of elements in scrape_input that could not be
-                scraped and may have caused the error")
-
+      if (n_tries == scrape_tries) {
+        warning(
+          paste(
+              paste("parsel encountered the following ERROR while trying to scrape chunk:", i, sep = " "),
+              "\n",
+              scrape_out[i],
+              "\n",
+              "Check under not_scraped of this function's output for the indices of elements in scrape_input that could not be scraped.",
+              sep = "\n"
+            )
+        )
         scrape_out <- "RSelenium ERROR"
         break
       }
     }
+
     result_list[[i]] <- scrape_out
     end[i] <- Sys.time()
     setTxtProgressBar(pb, i)
@@ -133,13 +142,15 @@ parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base
     est <- lres * (mean(end[end != 0] - init[init != 0])) - time
     remainining <- round(lubridate::seconds_to_period(est), 0)
 
-    cat(paste(" // Execution time:", time,
-              " // Estimated time remaining:", remainining), "")
+    cat(paste(
+      " // Execution time:", time,
+      " // Estimated time remaining:", remainining
+    ), "")
   }
 
   close(pb)
 
-  if("RSelenium ERROR" %in% result_list){
+  if ("RSelenium ERROR" %in% result_list) {
     unscraped <- unlist(chunks[which(result_list == "RSelenium ERROR")])
     results <- result_list[-which(result_list == "RSelenium ERROR")]
   } else {
@@ -153,7 +164,3 @@ parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base
   close_rselenium()
   parallel::stopCluster(clust)
 }
-
-
-
-

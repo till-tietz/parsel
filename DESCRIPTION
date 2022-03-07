@@ -1,12 +1,14 @@
-Package: parsel
 Type: Package
-Title: parallel execution of RSelenium
+Package: parsel
+Title: Parallel Execution of RSelenium
 Version: 0.1.0
-Author: Till Tietz
-Maintainer: Till Tietz <ttietz2014@gmail.com>
+Authors@R: c(
+    person("Till", "Tietz", email = "ttietz2014@gmail.com", role = c("cre","aut")))
 Description: Speed up RSelenium webscraping by scraping on multiple browsers 
     simultaniously. 
 License: MIT + file LICENSE
+URL: https://github.com/till-tietz/parsel
+BugReports: https://github.com/till-tietz/parsel/issues
 Encoding: UTF-8
 LazyData: true
 Imports: 
