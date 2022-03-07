@@ -4,8 +4,8 @@ Title: Parallel Execution of RSelenium
 Version: 0.1.0
 Authors@R: c(
     person("Till", "Tietz", email = "ttietz2014@gmail.com", role = c("cre","aut")))
-Description: Speed up RSelenium webscraping by scraping on multiple browsers 
-    simultaniously. 
+Description: Speed up RSelenium Web scraping by scraping on multiple browsers 
+    simultaneously. 
 License: MIT + file LICENSE
 URL: https://github.com/till-tietz/parsel
 BugReports: https://github.com/till-tietz/parsel/issues

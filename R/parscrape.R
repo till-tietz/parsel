@@ -12,56 +12,45 @@
 #' @export
 
 parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base"), browser, ports = NULL, chunk_size = NULL, scrape_tries = 1, proxy = NULL) {
-  if (missing(scrape_fun)) {
-    stop("missing scrape_fun")
-  }
 
-  if (!is.function(scrape_fun)) {
+  if(!is.function(scrape_fun)){
     stop("scrape_fun is not a function")
   }
 
-  if (missing(scrape_input)) {
-    stop("missing scrape_input")
-  }
-
-  if (missing(cores)) {
-    stop("missing cores")
-  }
-
-  if (is.null(cores)) {
+  if(is.null(cores)){
     cores <- parallel::detectCores() - 1
-  }
-
-  if (!is.null(cores) & !is.numeric(cores)) {
+  } else if(!is.numeric(cores)){
     stop("cores is not numeric")
   }
 
-  if (missing(packages)) {
-    stop("missing packages")
+  if(!is.character(packages)){
+    stop("packages is not character")
   }
 
-  if (missing(browser)) {
-    stop("missing browser")
+  if (!is.character(browser)) {
+    stop("browser is not character")
   }
 
-  if (missing(scrape_tries)) {
-    stop("missing scrape_tries")
+  if(is.null(ports)){
+    ports <- sample(1000:9999, cores, replace = FALSE)
+  } else if(!is.numeric(ports)){
+    stop("ports is not numeric")
+  } else if(length(ports) != cores){
+    stop("mismatch between number of ports and cores: please specify a unique port for each core you wish to run")
   }
 
-  if (!is.numeric(scrape_tries)) {
+  if(is.null(chunk_size)){
+    chunk_size <- cores
+  } else if(!is.numeric(chunk_size)){
+    stop("chunk size is not numeric")
+  }
+
+  if(!is.numeric(scrape_tries)){
     stop("scrape_tries not numeric")
   }
 
-  if (is.null(ports)) {
-    ports <- sample(1000:9999, cores, replace = FALSE)
-  }
-
-  if (is.null(chunk_size)) {
-    chunk_size <- cores
-  }
-
-  if(!is.numeric(chunk_size)){
-    stop("chunk size not numeric")
+  if(!is.null(proxy) & !is.function(proxy)){
+    stop("proxy is not a function")
   }
 
   ports <- as.list(ports)
