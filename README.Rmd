@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/till-tietz/parsel/workflows/R-CMD-check/badge.svg)](https://github.com/till-tietz/parsel/actions)
 <!-- badges: end -->
 
-`parsel` is a framework for parallel execution of RSelenium. It allows you to easily and conveniently run multiple RSelenium browsers simultaneously 
+`parsel` is a framework for parallel execution of `RSelenium`. It allows you to easily and conveniently run multiple `RSelenium` browsers simultaneously 
 to speed up your dynamic web scraping jobs.   
 
 ## Installation
@@ -44,18 +44,16 @@ and parallelize it with `parsel`.
 
 `parsel` requires two things: 
 
-1. some scraping function defining the actions to be executed in each RSelenium instance 
-2. some input to those actions (e.g. search terms to be entered in search boxes or links to navigate to etc.)
+1. a scraping function defining the actions to be executed in each `RSelenium` instance. Actions to be executed in each browser instance should be written in the conventional `RSelenium` syntax with `remDr$`.   
+2. some input `x` to those actions (e.g. search terms to be entered in search boxes or links to navigate to etc.)
 
 ```{r}
 library(RSelenium)
 library(parsel)
 
 #let's define our scraping function input 
-#we want to run our function 20 times and we want it to start on the wikipedia main page each time 
-#(we obviously don't have to start from the main page each time but let's run with this for illustrative purposes)
-
-input <- rep("https://de.wikipedia.org",20)
+#we want to run our function 8 times and we want it to start on the wikipedia main page each time 
+input <- rep("https://de.wikipedia.org",8)
 
 #let's define our scraping function 
 
@@ -115,8 +113,7 @@ get_wiki_text <- function(x){
 ```
 
 Now that we have our scrape function + input we can parallelize the execution of the function.
-parscrape will show a progress bar, as well as elapsed and estimated remaining time indicators so you 
-can keep track of scraping progress. 
+`parscrape` will show a progress bar, as well as elapsed and estimated remaining time indicators so you can keep track of scraping progress. 
 
 ```{r, results = 'hide', warning = FALSE}
 wiki_text <- parsel::parscrape(scrape_fun = get_wiki_text,
@@ -129,7 +126,7 @@ wiki_text <- parsel::parscrape(scrape_fun = get_wiki_text,
 
 ```
 
-parsel returns a list with two elements:
+`parscrape` returns a list with two elements:
 
 1. a list of your scrape function output 
 2. a list of elements it was unable to scrape 

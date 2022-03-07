@@ -4,9 +4,21 @@
 \name{parsel-package}
 \alias{parsel}
 \alias{parsel-package}
-\title{parsel: parallel execution of RSelenium}
+\title{parsel: Parallel Execution of RSelenium}
 \description{
 Speed up RSelenium webscraping by scraping on multiple browsers 
     simultaniously.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/till-tietz/parsel}
+  \item Report bugs at \url{https://github.com/till-tietz/parsel/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Till Tietz \email{ttietz2014@gmail.com}
+
 }
 \keyword{internal}

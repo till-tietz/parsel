@@ -6,4 +6,4 @@
 ## usethis namespace: start
 ## usethis namespace: end
 
-utils::globalVariables(c("rD","remDr","clust"))
+utils::globalVariables(c("rD", "remDr", "clust"))
