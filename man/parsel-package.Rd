@@ -6,8 +6,8 @@
 \alias{parsel-package}
 \title{parsel: Parallel Execution of RSelenium}
 \description{
-Speed up RSelenium webscraping by scraping on multiple browsers 
-    simultaniously.
+Speed up RSelenium Web scraping by scraping on multiple browsers 
+    simultaneously.
 }
 \seealso{
 Useful links:
