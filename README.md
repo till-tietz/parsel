@@ -127,13 +127,3 @@ wiki_text <- parsel::parscrape(scrape_fun = get_wiki_text,
 
 1.  a list of your scrape function output
 2.  a list of elements it was unable to scrape
-
-<!-- end list -->
-
-``` r
-str(wiki_text[["scraped_results"]])
-#>  NULL
-str(wiki_text[["not_scraped"]])
-#>  Named int [1:8] 1 2 3 4 5 6 7 8
-#>  - attr(*, "names")= chr [1:8] "11" "12" "13" "14" ...
-```

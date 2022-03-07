@@ -47,7 +47,7 @@ and parallelize it with `parsel`.
 1. a scraping function defining the actions to be executed in each `RSelenium` instance. Actions to be executed in each browser instance should be written in the conventional `RSelenium` syntax with `remDr$`.   
 2. some input `x` to those actions (e.g. search terms to be entered in search boxes or links to navigate to etc.)
 
-```{r}
+```{r, eval = FALSE}
 library(RSelenium)
 library(parsel)
 
@@ -115,7 +115,7 @@ get_wiki_text <- function(x){
 Now that we have our scrape function + input we can parallelize the execution of the function.
 `parscrape` will show a progress bar, as well as elapsed and estimated remaining time indicators so you can keep track of scraping progress. 
 
-```{r, results = 'hide', warning = FALSE}
+```{r, results = 'hide', warning = FALSE, eval = FALSE}
 wiki_text <- parsel::parscrape(scrape_fun = get_wiki_text,
                                scrape_input = input,
                                cores = 4,
@@ -130,8 +130,5 @@ wiki_text <- parsel::parscrape(scrape_fun = get_wiki_text,
 
 1. a list of your scrape function output 
 2. a list of elements it was unable to scrape 
-```{r}
-str(wiki_text[["scraped_results"]])
-str(wiki_text[["not_scraped"]])
-```
+
 

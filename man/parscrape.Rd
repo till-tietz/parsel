@@ -12,7 +12,7 @@ parscrape(
   browser,
   ports = NULL,
   chunk_size = NULL,
-  scrape_tries = 2,
+  scrape_tries = 1,
   proxy = NULL
 )
 }
