@@ -6,9 +6,9 @@
 #' @param browser a character vector specifying the browser to be used
 #' @param ports vector of ports for RSelenium instances (if left at default NULL parscrape will randomly generate ports)
 #' @param chunk_size number of scrape_input elements to be processed per round of scrape_function (parscrape splits scrape_input into chunks and runs scrape_function in multiple rounds to avoid loosing data due to errors). Defaults to number of cores.
-#' @param scrape_tries sets number of times parscrape will re-try to scrape a chunk when encountering an error
+#' @param scrape_tries number of times parscrape will re-try to scrape a chunk when encountering an error
 #' @param proxy a proxy setting function that runs before scraping each chunk
-#' @return list with output of scrape_fun in "scraped_results" and a vector of indices of scrape_input elements that could not be scraped in "not_scaped"
+#' @return list with output of scrape_fun in "scraped_results" and a data.frame of unscraped input elements with associated errors in "not_scraped".
 #' @export
 
 parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base"), browser, ports = NULL, chunk_size = NULL, scrape_tries = 1, proxy = NULL) {
@@ -80,6 +80,7 @@ parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base
   chunks <- split(c(1:length(scrape_input)), ceiling(seq_along(c(1:length(scrape_input))) / chunk_size))
 
   result_list <- vector(mode = "list", length = length(chunks))
+  error_list <- vector(mode = "list", length = length(chunks))
   lres <- length(result_list)
 
   pb <- txtProgressBar(
@@ -108,18 +109,11 @@ parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base
         break
       }
       if (n_tries == scrape_tries) {
-        warning(
-          paste(
-              paste("parsel encountered the following ERROR while trying to scrape chunk:", i, sep = " "),
-              "\n",
-              scrape_out[i],
-              "\n",
-              "Check under not_scraped of this function's output for the indices of elements in scrape_input that could not be scraped.",
-              sep = "\n"
-            )
-        )
-        scrape_out <- "RSelenium ERROR"
+
+        error_list[[i]] <- gsub("\t","",gsub("\n","",scrape_out))
+        scrape_out <- NULL
         break
+
       }
     }
 
@@ -139,15 +133,20 @@ parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base
 
   close(pb)
 
-  if ("RSelenium ERROR" %in% result_list) {
-    unscraped <- unlist(chunks[which(result_list == "RSelenium ERROR")])
-    results <- result_list[-which(result_list == "RSelenium ERROR")]
-  } else {
-    unscraped <- NULL
-    results <- result_list
+  unscraped_chunks <- which(!sapply(error_list,is.null))
+
+  if(length(unscraped_chunks) > 0){
+    unscraped <- data.frame(
+      element_input_id = unlist(chunks[unscraped_chunks]),
+      element_chunk = rep(unscraped_chunks, each = chunk_size),
+      error = rep(unlist(error_list), each = chunk_size)
+    )
+
+    warning("parscrape could not scrape certain elements. Check under not_scraped in the function output for element ids and errors.")
+
   }
 
-  results <- unlist(results, recursive = FALSE)
+  results <- unlist(purrr::compact(result_list), recursive = FALSE)
   return(list("scraped_results" = results, "not_scraped" = unscraped))
 
   close_rselenium()
