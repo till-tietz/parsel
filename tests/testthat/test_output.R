@@ -29,9 +29,10 @@ testthat::test_that(
                              scrape_tries = 1,
                              chunk_size = 1)
 
-    expect_length(out[["not_scraped"]],1)
+    expect_equal(nrow(out[["not_scraped"]]),1)
+    expect_equal(ncol(out[["not_scraped"]]),3)
+    expect_equal(class(out[["not_scraped"]]),"data.frame")
     expect_equal(out[["scraped_results"]][[1]][[1]], "Wikipedia")
-
   }
 )
 
