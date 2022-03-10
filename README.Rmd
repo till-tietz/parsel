@@ -19,8 +19,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/till-tietz/parsel/workflows/R-CMD-check/badge.svg)](https://github.com/till-tietz/parsel/actions)
 <!-- badges: end -->
 
-`parsel` is a framework for parallel execution of `RSelenium`. It allows you to easily and conveniently run multiple `RSelenium` browsers simultaneously 
-to speed up your dynamic web scraping jobs.   
+`parsel` is a framework for parallelized  dynamic web-scraping using `RSelenium`. Leveraging parallel processing, it allows you to run any `RSelenium` web-scraping routine on multiple browser instances simultaneously, thus dramatically increasing the efficiency of your scraping. `parsel` utilizes chunked input processing as well as error catching and logging, to ensure seamless execution of your scraping routine and minimal data loss, even in the presence of unforeseen `RSelenium` errors. 
 
 ## Installation
 
@@ -32,10 +31,10 @@ devtools::install_github("till-tietz/parsel")
 ```
 ## Example
 
-The following toy example will hopefully serve to illustrate the functions and ideas behind how `parsel` operates.
+The following example will hopefully serve to illustrate the functions and ideas behind how `parsel` operates.
 We'll set up the following scraping job:
 
-1. navigate to a random wikipedia article 
+1. navigate to a random Wikipedia article 
 2. retrieve its title 
 3. navigate to the first linked page on the article 
 4. retrieve the linked page's title and first section 
@@ -112,7 +111,7 @@ get_wiki_text <- function(x){
 
 ```
 
-Now that we have our scrape function + input we can parallelize the execution of the function.
+Now that we have our scrape function and input we can parallelize the execution of the function.
 `parscrape` will show a progress bar, as well as elapsed and estimated remaining time indicators so you can keep track of scraping progress. 
 
 ```{r, results = 'hide', warning = FALSE, eval = FALSE}
@@ -129,6 +128,6 @@ wiki_text <- parsel::parscrape(scrape_fun = get_wiki_text,
 `parscrape` returns a list with two elements:
 
 1. a list of your scrape function output 
-2. a list of elements it was unable to scrape 
+2. a data.frame of inputs it was unable to scrape, and the associated error messages 
 
 

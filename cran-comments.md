@@ -1,7 +1,7 @@
 ## Test environments
-* local R installation, R 4.1.1
-* ubuntu 16.04 (on travis-ci), R 4.1.1
-* win-builder (devel)
+* local Windows install, R 4.1.1
+* win-builder, R version 4.1.2
+* win-builder, R version 4.0.5
 * R-hub windows-x86_64-devel (r-devel)
 * R-hub ubuntu-gcc-release (r-release)
 * R-hub fedora-clang-devel (r-devel)
