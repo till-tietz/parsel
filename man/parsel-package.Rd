@@ -4,10 +4,13 @@
 \name{parsel-package}
 \alias{parsel}
 \alias{parsel-package}
-\title{parsel: Parallel Execution of RSelenium}
+\title{parsel: Parallelized Dynamic Web-Scraping Using RSelenium}
 \description{
-Speed up RSelenium Web scraping by scraping on multiple browsers 
-    simultaneously.
+A system to increase the efficiency of dynamic web-scraping with RSelenium 
+    by leveraging parallel processing. You provide a function wrapper for your RSelenium scraping
+    routine with a set of inputs, and 'parsel' runs it in several browser instances. Chunked input 
+    processing as well as error catching and logging ensures seamless execution and minimal data loss,
+    even when unforseen RSelenium errors occur.
 }
 \seealso{
 Useful links:
