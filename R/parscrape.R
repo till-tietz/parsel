@@ -9,10 +9,15 @@
 #' @param chunk_size number of scrape_input elements to be processed per round of scrape_function (parscrape splits scrape_input into chunks and runs scrape_function in multiple rounds to avoid loosing data due to errors). Defaults to number of cores.
 #' @param scrape_tries number of times parscrape will re-try to scrape a chunk when encountering an error
 #' @param proxy a proxy setting function that runs before scraping each chunk
+#' @param extraCapabilities a list of extraCapabilities options to be passed to rsDriver
 #' @return list with output of scrape_fun in "scraped_results" and a data.frame of unscraped input elements with associated errors in "not_scraped".
 #' @export
 
+<<<<<<< HEAD
 parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base"), browser, ports = NULL, chunk_size = NULL, scrape_tries = 1, proxy = NULL, ) {
+=======
+parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base"), browser, ports = NULL, chunk_size = NULL, scrape_tries = 1, proxy = NULL, extraCapabilities = list()) {
+>>>>>>> e78619982e390f428f3f8b8333d299aaab01cb5a
 
   if(!is.function(scrape_fun)){
     stop("scrape_fun is not a function")
@@ -54,6 +59,10 @@ parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base
     stop("proxy is not a function")
   }
 
+  if(!is.list(extraCapabilities)){
+    stop("extraCapabilities is not a list")
+  }
+
   ports <- as.list(ports)
 
   pos <- 1
@@ -64,8 +73,12 @@ parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base
   parallel::clusterApply(clust, ports, function(x) {
     lapply(packages, require, character.only = TRUE)
 
-    assign("rD", RSelenium::rsDriver(browser = browser, port = x), envir = envir)
-    assign("remDr", rD[["client"]], envir = envir)
+    assign("rD", RSelenium::rsDriver(browser = browser, port = x,
+                                     extraCapabilities = extraCapabilities),
+           envir = envir)
+
+    assign("remDr", rD[["client"]],
+           envir = envir)
   })
 
   if (!is.list(scrape_input)) {

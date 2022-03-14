@@ -13,7 +13,8 @@ parscrape(
   ports = NULL,
   chunk_size = NULL,
   scrape_tries = 1,
-  proxy = NULL
+  proxy = NULL,
+  extraCapabilities = list()
 )
 }
 \arguments{
@@ -34,6 +35,8 @@ parscrape(
 \item{scrape_tries}{number of times parscrape will re-try to scrape a chunk when encountering an error}
 
 \item{proxy}{a proxy setting function that runs before scraping each chunk}
+
+\item{extraCapabilities}{a list of extraCapabilities options to be passed to rsDriver}
 }
 \value{
 list with output of scrape_fun in "scraped_results" and a data.frame of unscraped input elements with associated errors in "not_scraped".
