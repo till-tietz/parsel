@@ -12,7 +12,7 @@
 #' @return list with output of scrape_fun in "scraped_results" and a data.frame of unscraped input elements with associated errors in "not_scraped".
 #' @export
 
-parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base"), browser, ports = NULL, chunk_size = NULL, scrape_tries = 1, proxy = NULL) {
+parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base"), browser, ports = NULL, chunk_size = NULL, scrape_tries = 1, proxy = NULL, ) {
 
   if(!is.function(scrape_fun)){
     stop("scrape_fun is not a function")
@@ -145,6 +145,8 @@ parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base
 
     warning("parscrape could not scrape certain elements. Check under not_scraped in the function output for element ids and errors.")
 
+  } else {
+    unscraped <- NULL
   }
 
   results <- unlist(purrr::compact(result_list), recursive = FALSE)
