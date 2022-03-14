@@ -13,11 +13,9 @@
 #' @return list with output of scrape_fun in "scraped_results" and a data.frame of unscraped input elements with associated errors in "not_scraped".
 #' @export
 
-<<<<<<< HEAD
-parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base"), browser, ports = NULL, chunk_size = NULL, scrape_tries = 1, proxy = NULL, ) {
-=======
+
 parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base"), browser, ports = NULL, chunk_size = NULL, scrape_tries = 1, proxy = NULL, extraCapabilities = list()) {
->>>>>>> e78619982e390f428f3f8b8333d299aaab01cb5a
+
 
   if(!is.function(scrape_fun)){
     stop("scrape_fun is not a function")
