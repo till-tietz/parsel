@@ -7,7 +7,7 @@ Authors@R: c(
 Description: A system to increase the efficiency of dynamic web-scraping with 'RSelenium'
     by leveraging parallel processing. You provide a function wrapper for your 'RSelenium' 
     scraping routine with a set of inputs, and 'parsel' runs it in several browser instances. 
-    Processing inputs in chunks as well as error catching and logging ensures seamless 
+    Chunked input processing as well as error catching and logging ensures seamless 
     execution and minimal data loss, even when unforeseen 'RSelenium' errors occur. 
 License: MIT + file LICENSE
 URL: https://github.com/till-tietz/parsel
