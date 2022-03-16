@@ -8,9 +8,10 @@ testthat::test_that(
   {
     testthat::skip_on_cran()
     skip_scrape()
-    input <- c(".central-textlogo__image",".central-textlogo__imagerrrr")
+    input_error <- c(".central-textlogo__image",".central-textlogo__imagerrrr")
+    input_noerror <- c(".central-textlogo__image",".central-textlogo__image")
 
-    f <- function(x){
+    scrape_fun <- function(x){
       input_i <- x
 
       remDr$navigate("https://www.wikipedia.org/")
@@ -21,20 +22,38 @@ testthat::test_that(
       return(element)
     }
 
-    out <- parsel::parscrape(scrape_fun = f,
-                             scrape_input = input,
-                             cores = 2,
-                             packages = c("RSelenium"),
-                             browser = "firefox",
-                             scrape_tries = 1,
-                             chunk_size = 1)
+    out_error <- parsel::parscrape(scrape_fun = scrape_fun,
+                                   scrape_input = input_error,
+                                   cores = 2,
+                                   packages = c("RSelenium"),
+                                   browser = "firefox",
+                                   scrape_tries = 1,
+                                   chunk_size = 1,
+                                   extraCapabilities = list(
+                                     "moz:firefoxOptions" = list(args = list('--headless'))
+                                     )
+                                   )
 
-    expect_equal(nrow(out[["not_scraped"]]),1)
-    expect_equal(ncol(out[["not_scraped"]]),3)
-    expect_equal(class(out[["not_scraped"]]),"data.frame")
-    expect_equal(out[["scraped_results"]][[1]][[1]], "Wikipedia")
+    out_noerror <- parsel::parscrape(scrape_fun = scrape_fun,
+                                     scrape_input = input_noerror,
+                                     cores = 2,
+                                     packages = c("RSelenium"),
+                                     browser = "firefox",
+                                     scrape_tries = 1,
+                                     chunk_size = 1,
+                                     extraCapabilities = list(
+                                       "moz:firefoxOptions" = list(args = list('--headless'))
+                                       )
+                                     )
+
+    expect_equal(nrow(out_error[["not_scraped"]]),1)
+    expect_equal(ncol(out_error[["not_scraped"]]),3)
+    expect_equal(class(out_error[["not_scraped"]]),"data.frame")
+    expect_equal(out_error[["scraped_results"]][[1]][[1]], "Wikipedia")
+    expect_equal(is.null(out_noerror[["not_scraped"]]), TRUE)
   }
 )
+
 
 
 

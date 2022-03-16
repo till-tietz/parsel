@@ -20,17 +20,17 @@ parscrape(
 \arguments{
 \item{scrape_fun}{a function with input x sending instructions to remDr (remote driver)/ scraping function to be parallelized}
 
-\item{scrape_input}{a data frame, list, or vector where each element is an input to be passed to scrape_function}
+\item{scrape_input}{a data frame, list, or vector where each element is an input to be passed to scrape_fun}
 
 \item{cores}{number of cores to run RSelenium instances on. Defaults to available cores - 1.}
 
-\item{packages}{a character vector with package names of packages used in scrape_function}
+\item{packages}{a character vector with package names of packages used in scrape_fun}
 
 \item{browser}{a character vector specifying the browser to be used}
 
-\item{ports}{vector of ports for RSelenium instances (if left at default NULL parscrape will randomly generate ports)}
+\item{ports}{vector of ports for RSelenium instances. If left at default NULL parscrape will randomly generate ports.}
 
-\item{chunk_size}{number of scrape_input elements to be processed per round of scrape_function (parscrape splits scrape_input into chunks and runs scrape_function in multiple rounds to avoid loosing data due to errors). Defaults to number of cores.}
+\item{chunk_size}{number of scrape_input elements to be processed per round of scrape_fun. parscrape splits scrape_input into chunks and runs scrape_fun in multiple rounds to avoid loosing data due to errors. Defaults to number of cores.}
 
 \item{scrape_tries}{number of times parscrape will re-try to scrape a chunk when encountering an error}
 
@@ -39,8 +39,33 @@ parscrape(
 \item{extraCapabilities}{a list of extraCapabilities options to be passed to rsDriver}
 }
 \value{
-list with output of scrape_fun in "scraped_results" and a data.frame of unscraped input elements with associated errors in "not_scraped".
+a list containing the elements: scraped_results and not_scraped. scraped_results is a list containing the output of scrape_fun. If there are no unscraped input elements then not_scraped is NULL. If there are unscraped elements not_scraped is a data.frame containing the scrape_input id, chunk id and associated error of all unscraped input elements.
 }
 \description{
 parallelize execution of RSelenium
+}
+\examples{
+\dontrun{
+input <- c(".central-textlogo__image",".central-textlogo__image")
+
+scrape_fun <- function(x){
+ input_i <- x
+ remDr$navigate("https://www.wikipedia.org/")
+ element <- remDr$findElement(using = "css", input_i)
+ element <- element$getElementText()
+ return(element)
+}
+
+parsel_out <- parscrape(scrape_fun = scrape_fun,
+                       scrape_input = input,
+                       cores = 2,
+                       packages = c("RSelenium"),
+                       browser = "firefox",
+                       scrape_tries = 1,
+                       chunk_size = 2,
+                       extraCapabilities = list(
+                        "moz:firefoxOptions" = list(args = list('--headless'))
+                        )
+                       )
+}
 }

@@ -11,11 +11,11 @@
 `parsel` is a framework for parallelized dynamic web-scraping using
 `RSelenium`. Leveraging parallel processing, it allows you to run any
 `RSelenium` web-scraping routine on multiple browser instances
-simultaneously, thus dramatically increasing the efficiency of your
-scraping. `parsel` utilizes chunked input processing as well as error
-catching and logging, to ensure seamless execution of your scraping
-routine and minimal data loss, even in the presence of unforeseen
-`RSelenium` errors.
+simultaneously, thus greatly increasing the efficiency of your scraping.
+`parsel` utilizes chunked input processing as well as error catching and
+logging, to ensure seamless execution of your scraping routine and
+minimal data loss, even in the presence of unforeseen `RSelenium`
+errors.
 
 ## Installation
 
@@ -29,9 +29,9 @@ devtools::install_github("till-tietz/parsel")
 
 ## Example
 
-The following example will hopefully serve to illustrate the functions
-and ideas behind how `parsel` operates. We’ll set up the following
-scraping job:
+The following example will hopefully serve to illustrate the
+functionality and ideas behind how `parsel` operates. We’ll set up the
+following scraping job:
 
 1.  navigate to a random Wikipedia article
 2.  retrieve its title
@@ -45,7 +45,7 @@ and parallelize it with `parsel`.
 1.  a scraping function defining the actions to be executed in each
     `RSelenium` instance. Actions to be executed in each browser
     instance should be written in the conventional `RSelenium` syntax
-    with `remDr$`.  
+    with `remDr$` specifying the remote driver.  
 2.  some input `x` to those actions (e.g. search terms to be entered in
     search boxes or links to navigate to etc.)
 
@@ -57,7 +57,7 @@ library(parsel)
 
 #let's define our scraping function input 
 #we want to run our function 8 times and we want it to start on the wikipedia main page each time 
-input <- rep("https://de.wikipedia.org",8)
+input <- rep("https://de.wikipedia.org",4)
 
 #let's define our scraping function 
 
@@ -116,13 +116,13 @@ get_wiki_text <- function(x){
 
 Now that we have our scrape function and input we can parallelize the
 execution of the function. `parscrape` will show a progress bar, as well
-as elapsed and estimated remaining time indicators so you can keep track
-of scraping progress.
+as elapsed and estimated remaining time so you can keep track of
+scraping progress.
 
 ``` r
 wiki_text <- parsel::parscrape(scrape_fun = get_wiki_text,
                                scrape_input = input,
-                               cores = 4,
+                               cores = 2,
                                packages = c("RSelenium","XML"),
                                browser = "firefox",
                                scrape_tries = 1)

@@ -2,10 +2,17 @@
 % Please edit documentation in R/close_rselenium.R
 \name{close_rselenium}
 \alias{close_rselenium}
-\title{utility function that closes all parallel instances of rselenium}
+\title{utility function that closes all parallel instances of RSelenium}
 \usage{
-close_rselenium()
+close_rselenium(clust)
+}
+\arguments{
+\item{clust}{\code{parallel} cluster}
+}
+\value{
+No return value, called to close RSelenium instances in parscrape.
 }
 \description{
-utility function that closes all parallel instances of rselenium
+utility function that closes all parallel instances of RSelenium
 }
+\keyword{internal}
