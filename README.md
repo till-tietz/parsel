@@ -21,10 +21,11 @@ errors.
 
 ## Installation
 
-You can install the development version of `parsel` from
-[GitHub](https://github.com/) with:
-
 ``` r
+# Install parsel from CRAN
+install.packages("parsel")
+
+# Or the development version from GitHub:
 # install.packages("devtools")
 devtools::install_github("till-tietz/parsel")
 ```
