@@ -27,8 +27,36 @@ go <- function(url, prev = NULL){
 
 }
 
-#' wrapper for
+#' wrapper for 'goBack'
+#'
+#' @export
 
 goback <- function(prev = NULL){
 
+  not_returned <- "not_returned <- TRUE"
+
+  from <- "from <- seleniumPipes::getCurrentUrl(remDr)"
+
+  go_back <- "remDr$goBack()"
+
+  while_loop <- paste("while(not_returned){",
+                      "Sys.sleep(0.25)",
+                      "current <- seleniumPipes::getCurrentUrl(remDr)",
+                      "if(current != from){",
+                      "not_returned <- FALSE",
+                      "}",
+                      "}",
+                      sep = "\n")
+
+  out <- list(paste(not_returned, from, go_back, while_loop, sep = "\n"))
+
+  if(is.null(prev)){
+    return(out)
+  } else {
+    return(append(prev_out))
+  }
+
 }
+
+
+

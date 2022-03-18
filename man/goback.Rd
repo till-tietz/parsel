@@ -2,10 +2,10 @@
 % Please edit documentation in R/rselenium_constructors.R
 \name{goback}
 \alias{goback}
-\title{wrapper for}
+\title{wrapper for 'goBack'}
 \usage{
 goback(prev = NULL)
 }
 \description{
-wrapper for
+wrapper for 'goBack'
 }
