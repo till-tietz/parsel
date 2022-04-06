@@ -8,6 +8,7 @@
 [![R-CMD-check](https://github.com/till-tietz/parsel/workflows/R-CMD-check/badge.svg)](https://github.com/till-tietz/parsel/actions)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/parsel)](https://CRAN.R-project.org/package=parsel)
+[![](https://cranlogs.r-pkg.org/badges/parsel)](https://cran.r-project.org/package=parsel)
 <!-- badges: end -->
 
 `parsel` is a framework for parallelized dynamic web-scraping using
