@@ -1,8 +1,19 @@
-#' wrapper for 'navigate'
+#' wrapper around \code{RSelenium remDr$mavigate} to generate safe navigation code
 #'
+#'|@param url a character string specifying the name of the variable holding the url string or the url string the function should navigate to.
+#' @return a character string defining 'RSelenium' navigation instructions that can be pasted into a scraping function
 #' @export
+#'
+#' @examples
+#'
+#' go("https://www.wikipedia.org/")
 
-go <- function(url, prev = NULL){
+
+go <- function(url){
+
+  if(!is.character(url)){
+    stop("url is not of type character")
+  }
 
   not_loaded <- "not_loaded <- TRUE"
 
@@ -17,21 +28,23 @@ go <- function(url, prev = NULL){
                       "}",
                       sep = "\n")
 
-  out <- list(paste(not_loaded, navigate, while_loop, sep = "\n"))
+  out <- paste(not_loaded, navigate, while_loop, sep = "\n")
 
-  if(is.null(prev)){
-    return(out)
-  } else {
-    return(append(prev, out))
-  }
 
+
+  return(out)
 }
 
-#' wrapper for 'goBack'
+#' wrapper around \code{RSelenium remDr$goBack} to generate safe backwards navigation code
 #'
+#' @return a character string defining 'RSelenium' backwards navigation instructions that can be pasted into a scraping function
 #' @export
+#'
+#' @examples
+#'
+#' goback()
 
-goback <- function(prev = NULL){
+goback <- function(){
 
   not_returned <- "not_returned <- TRUE"
 
@@ -48,15 +61,15 @@ goback <- function(prev = NULL){
                       "}",
                       sep = "\n")
 
-  out <- list(paste(not_returned, from, go_back, while_loop, sep = "\n"))
+  out <- paste(not_returned, from, go_back, while_loop, sep = "\n")
 
-  if(is.null(prev)){
-    return(out)
-  } else {
-    return(append(prev_out))
-  }
-
+  return(out)
 }
+
+
+
+
+
 
 
 
