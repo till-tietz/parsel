@@ -4,7 +4,7 @@
 \name{parsel-package}
 \alias{parsel}
 \alias{parsel-package}
-\title{parsel: Parallelized Dynamic Web-Scraping Using RSelenium}
+\title{parsel: Parallelized Dynamic Web-Scraping Using 'RSelenium'}
 \description{
 A system to increase the efficiency of dynamic web-scraping with 'RSelenium'
     by leveraging parallel processing. You provide a function wrapper for your 'RSelenium' 
