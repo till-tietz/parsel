@@ -1,13 +1,14 @@
-#' pipe-like operator that pastes together the output of two functions
+#' pipe-like operator that passes the ouput of lhs to the prev argument of rhs to paste together a scraper function in sequence.
 #'
-#' @param lhs a function call returning a charater string
-#' @param rhs a fuction call returning a character string which should be pasted to step_1
-#' @return a character string of the pasted output of step_1 and step_2
+#' @param lhs a parsel constructor function call
+#' @param rhs a parsel constructor fuction call that should accept lhs as its prev argument
+#' @return the output of rhs evaluated with lhs as the prev argument
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #'
+#' #paste together the go and goback output in sequence
 #' go("https://www.wikipedia.org/") %>>%
 #' goback()
 #'
@@ -27,7 +28,15 @@
 
     rhs_out <- do.call(f_rhs, append(call_rhs, list(prev = lhs)))
 
+  } else {
+
+    to_name <- which(names(call_rhs) == "")
+    names(call_rhs)[to_name] <- names(all_args_rhs)[to_name]
+
+    rhs_out <- do.call(f_rhs, append(call_rhs, list(prev = lhs)))
+
   }
+
   return(rhs_out)
 }
 
