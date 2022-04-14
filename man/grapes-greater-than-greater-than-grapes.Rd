@@ -4,21 +4,24 @@
 \alias{\%>>\%}
 \title{pipe-like operator that pastes together the output of two functions}
 \usage{
-step_1 \%>>\% step_2
+lhs \%>>\% rhs
 }
 \arguments{
-\item{step_1}{a function call returning a charater string}
+\item{lhs}{a function call returning a charater string}
 
-\item{step_2}{a fuction call returning a character string which should be pasted to \code{step_1}}
+\item{rhs}{a fuction call returning a character string which should be pasted to step_1}
 }
 \value{
-a character string of the pasted output of \code{step_1} and \code{step_2}
+a character string of the pasted output of step_1 and step_2
 }
 \description{
 pipe-like operator that pastes together the output of two functions
 }
 \examples{
+\dontrun{
 
 go("https://www.wikipedia.org/") \%>>\%
 goback()
+
+}
 }
