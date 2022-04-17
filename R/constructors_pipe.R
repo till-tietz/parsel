@@ -20,25 +20,39 @@
 
   call_rhs <- as.list(substitute(rhs))
   f_rhs <- eval(call_rhs[[1]])
+  f_rhs_name <- call_rhs[[1]]
 
-  all_args_rhs <- as.list(rlang::fn_fmls(f_rhs))
+  all_args_rhs <- as.list(rlang::fn_fmls(get(f_rhs_name)))
+  all_args_rhs <- all_args_rhs[-which(names(all_args_rhs) == "prev")]
+
   call_rhs <- call_rhs[-1]
 
-  if(all(names(call_rhs) != "")){
+  if(f_rhs_name == "show"){
 
-    rhs_out <- do.call(f_rhs, append(call_rhs, list(prev = lhs)))
+    do.call(f_rhs, append(call_rhs, list(prev = lhs)))
 
   } else {
 
-    to_name <- which(names(call_rhs) == "")
-    names(call_rhs)[to_name] <- names(all_args_rhs)[to_name]
+    if(is.null(names(call_rhs))){
+
+      names(call_rhs) <- names(all_args_rhs)
+
+    } else if(sum(names(call_rhs) == "") > 0){
+
+      to_name <- which(names(call_rhs) == "")
+      names(call_rhs)[to_name] <- names(all_args_rhs)[to_name]
+
+    }
 
     rhs_out <- do.call(f_rhs, append(call_rhs, list(prev = lhs)))
 
+    return(rhs_out)
+
   }
 
-  return(rhs_out)
 }
+
+
 
 
 
