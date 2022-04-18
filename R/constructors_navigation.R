@@ -32,7 +32,7 @@ go <- function(url, prev = NULL){
                       "}",
                       sep = "\n")
 
-  out <- paste(not_loaded, navigate, while_loop, sep = "\n")
+  out <- paste("# navigate to url", not_loaded, navigate, while_loop, sep = "\n")
 
   if(!is.null(prev)){
     out <- paste(prev, out, sep = " \n \n ")
@@ -71,7 +71,7 @@ goback <- function(prev = NULL){
                       "}",
                       sep = "\n")
 
-  out <- paste(not_returned, from, go_back, while_loop, sep = "\n")
+  out <- paste("# navigate back to previous url", not_returned, from, go_back, while_loop, sep = "\n")
 
   if(!is.null(prev)){
     out <- paste(prev, out, sep = " \n \n ")
@@ -79,6 +79,4 @@ goback <- function(prev = NULL){
 
   return(out)
 }
-
-
 
