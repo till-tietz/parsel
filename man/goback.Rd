@@ -2,7 +2,7 @@
 % Please edit documentation in R/constructors_navigation.R
 \name{goback}
 \alias{goback}
-\title{wrapper around remDr$goBack to generate safe backwards navigation code}
+\title{wrapper around remDr$goBack method to generate safe backwards navigation code}
 \usage{
 goback(prev = NULL)
 }
@@ -13,12 +13,13 @@ goback(prev = NULL)
 a character string defining 'RSelenium' backwards navigation instructions that can be pasted into a scraping function
 }
 \description{
-wrapper around remDr$goBack to generate safe backwards navigation code
+wrapper around remDr$goBack method to generate safe backwards navigation code
 }
 \examples{
 \dontrun{
 
-goback()
+goback() \%>>\%
+show()
 
 }
 }
