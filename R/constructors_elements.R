@@ -36,22 +36,26 @@ gen_varname <- function(input){
 #' @examples
 #' \dontrun{
 #'
-#' #navigate to wikipedia and clikc on random article
+#' #navigate to wikipedia, click random article
 #'
-#' go("https://www.wikipedia.org/") %>>%
-#' click(using = "xpath", value = "/html/body/div[5]/div[2]/nav[1]/div/ul/li[3]/a", name = "rand_art") %>>%
+#' parsel::go("https://www.wikipedia.org/") %>>%
+#' parsel::click(using = "id", value = "n-randompage") %>>%
 #' show()
 #'
 #' }
 
 click <- function(using, value, name = NULL, prev = NULL){
 
-  if(!is.character(using)){
-    stop("using is not of type character")
+  if(!missing(using)){
+    if(!is.character(using)){
+      stop("using is not of type character")
+    }
   }
 
-  if(!is.character(value)){
-    stop("value is not of type character")
+  if(!missing(value)){
+    if(!is.character(value)){
+      stop("value is not of type character")
+    }
   }
 
   if(!is.null(name)){
@@ -90,7 +94,7 @@ click <- function(using, value, name = NULL, prev = NULL){
 #'
 #' @param using character string specifying locator scheme to use to search elements. Available schemes: "class name", "css selector", "id", "name", "link text", "partial link text", "tag name", "xpath".
 #' @param value character string specifying the search target.
-#' @param name character string specifying the object name the RSelenium "wElement" class object should be saved to.
+#' @param name character string specifying the object name the RSelenium "wElement" class object should be saved to.If NULL a name will be generated automatically.
 #' @param text a character vector specifying the text to be typed.
 #' @param text_object a character string specifying the name of an external object holding the text to be typed. Note that the remDr$sendKeysToElement method only accepts list inputs.
 #' @param prev a placeholder for the output of functions being piped into type(). Defaults to NULL and should not be altered.
@@ -100,28 +104,38 @@ click <- function(using, value, name = NULL, prev = NULL){
 #' @examples
 #' \dontrun{
 #'
-#' #navigate to wikipedia and type "Hello" into the search box and press enter
+#' #navigate to wikipedia, type "Hello" into the search box,  press enter
 #'
-#' go("https://www.wikipedia.org/") %>>%
-#' type(using = "id", value = "searchInput", name = "searchbox", text = c("Hello","\uE007")) %>>%
-#' show()
+#' parsel::go("https://www.wikipedia.org/") %>>%
+#' parsel::type(using = "id",
+#'              value = "searchInput",
+#'              name = "searchbox",
+#'              text = c("Hello","\uE007")) %>>%
+#'              show()
 #'
-#' #navigate to wikipeda and type content stored in external object "x" into search box
+#' #navigate to wikipeda, type content stored in external object "x" into search box
 #'
-#' go("https://www.wikipedia.org/") %>>%
-#' type(using = "id", value = "searchInput", name = "searchbox", text_object = "x") %>>%
-#' show()
+#' parsel::go("https://www.wikipedia.org/") %>>%
+#' parsel::type(using = "id",
+#'              value = "searchInput",
+#'              name = "searchbox",
+#'              text_object = "x") %>>%
+#'              show()
 #'
 #' }
 
 type <- function(using, value, name = NULL, text, text_object, prev = NULL){
 
-  if(!is.character(using)){
-    stop("using is not of type character")
+  if(!missing(using)){
+    if(!is.character(using)){
+      stop("using is not of type character")
+    }
   }
 
-  if(!is.character(value)){
-    stop("value is not of type character")
+  if(!missing(value)){
+    if(!is.character(value)){
+      stop("value is not of type character")
+    }
   }
 
   if(!is.null(name)){
@@ -130,7 +144,7 @@ type <- function(using, value, name = NULL, text, text_object, prev = NULL){
     }
   }
 
-  if(!missing(test) & !missing(text_object)){
+  if(!missing(text) & !missing(text_object)){
     stop("please only define one of text or text_object")
   }
 
@@ -140,6 +154,8 @@ type <- function(using, value, name = NULL, text, text_object, prev = NULL){
     if(!is.character(text)){
       stop("text is not of type character")
     }
+
+    text <- paste("'",text,"'", sep = "")
 
     if(length(text) > 1){
       text <- paste(text, collapse = ",")
@@ -197,6 +213,89 @@ type <- function(using, value, name = NULL, text, text_object, prev = NULL){
 
 #' wrapper around getElementText() method to generate safe scraping code
 #'
+#' @param using character string specifying locator scheme to use to search elements. Available schemes: "class name", "css selector", "id", "name", "link text", "partial link text", "tag name", "xpath".
+#' @param value character string specifying the search target.
+#' @param name character string specifying the object name the RSelenium "wElement" class object should be saved to. If NULL a name will be generated automatically.
+#' @param prev a placeholder for the output of functions being piped into get_element(). Defaults to NULL and should not be altered.
+#' @return a character string defining 'RSelenium' getElementText() instructions that can be pasted into a scraping function.
+#' @export
 #'
+#' @examples
+#' \dontrun{
+#'
+#' #navigate to wikipedia, type "Hello" into the search box,
+#' #press enter, get page header
+#'
+#' parsel::go("https://www.wikipedia.org/") %>>%
+#' parsel::type(using = "id",
+#'              value = "searchInput",
+#'              name = "searchbox",
+#'              text = c("Hello","\uE007")) %>>%
+#' parsel::get_element(using = "id",
+#'                     value = "firstHeading",
+#'                     name = "header") %>>%
+#'             show()
+#'
+#' #navigate to wikipedia, type "Hello" into the search box, press enter,
+#' #get page header, save in external data.frame x.
+#'
+#' parsel::go("https://www.wikipedia.org/") %>>%
+#' parsel::type(using = "id",
+#'              value = "searchInput",
+#'              name = "searchbox",
+#'              text = c("Hello","\uE007")) %>>%
+#' parsel::get_element(using = "id",
+#'                     value = "firstHeading",
+#'                     name = "x[,1]") %>>%
+#'                     show()
+#'
+#' }
 
+get_elemnt <- function(using, value, name = NULL, prev = NULL){
+
+  if(!missing(using)){
+    if(!is.character(using)){
+      stop("using is not of type character")
+    }
+  }
+
+  if(!missing(value)){
+    if(!is.character(value)){
+      stop("value is not of type character")
+    }
+  }
+
+  if(!is.null(name)){
+    if(!is.character(name)){
+      stop("name is not of type character")
+    }
+  }
+
+  if(is.null(name)){
+
+    if(is.null(prev)){
+      name <- gen_varname("")
+    } else {
+      name <- gen_varname(prev)
+    }
+
+  }
+
+  finding <- paste(name, " <- ", "try(", "remDr$findElement(using = '", using,"', '", value, "')", ")", sep = "")
+
+  out <- paste(finding,
+               paste("if(is(", name, ",'try-error')){", sep = ""),
+               paste(name, " <- NA", sep = ""),
+               "} else {",
+               paste(name, " <- ", name,"$getElementText()", sep = ""),
+               "}",
+               sep = " \n")
+
+  if(!is.null(prev)){
+    out <- paste(prev, out, sep = " \n \n ")
+  }
+
+  return(out)
+
+}
 

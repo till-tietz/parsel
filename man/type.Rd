@@ -11,7 +11,7 @@ type(using, value, name = NULL, text, text_object, prev = NULL)
 
 \item{value}{character string specifying the search target.}
 
-\item{name}{character string specifying the object name the RSelenium "wElement" class object should be saved to.}
+\item{name}{character string specifying the object name the RSelenium "wElement" class object should be saved to.If NULL a name will be generated automatically.}
 
 \item{text}{a character vector specifying the text to be typed.}
 
@@ -28,17 +28,23 @@ wrapper around sendKeysToElement() method to generate safe scraping code
 \examples{
 \dontrun{
 
-#navigate to wikipedia and type "Hello" into the search box and press enter
+#navigate to wikipedia, type "Hello" into the search box,  press enter
 
-go("https://www.wikipedia.org/") \%>>\%
-type(using = "id", value = "searchInput", name = "searchbox", text = c("Hello","\uE007")) \%>>\%
-show()
+parsel::go("https://www.wikipedia.org/") \%>>\%
+parsel::type(using = "id",
+             value = "searchInput",
+             name = "searchbox",
+             text = c("Hello","\uE007")) \%>>\%
+             show()
 
-#navigate to wikipeda and type content stored in external object "x" into search box
+#navigate to wikipeda, type content stored in external object "x" into search box
 
-go("https://www.wikipedia.org/") \%>>\%
-type(using = "id", value = "searchInput", name = "searchbox", text_object = "x") \%>>\%
-show()
+parsel::go("https://www.wikipedia.org/") \%>>\%
+parsel::type(using = "id",
+             value = "searchInput",
+             name = "searchbox",
+             text_object = "x") \%>>\%
+             show()
 
 }
 }

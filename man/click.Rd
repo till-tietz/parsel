@@ -24,10 +24,10 @@ wrapper around clickElement() method to generate safe scraping code
 \examples{
 \dontrun{
 
-#navigate to wikipedia and clikc on random article
+#navigate to wikipedia, click random article
 
-go("https://www.wikipedia.org/") \%>>\%
-click(using = "xpath", value = "/html/body/div[5]/div[2]/nav[1]/div/ul/li[3]/a", name = "rand_art") \%>>\%
+parsel::go("https://www.wikipedia.org/") \%>>\%
+parsel::click(using = "id", value = "n-randompage") \%>>\%
 show()
 
 }

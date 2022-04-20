@@ -20,10 +20,11 @@
 
   call_rhs <- as.list(substitute(rhs))
   f_rhs <- eval(call_rhs[[1]])
-  f_rhs_name <- call_rhs[[1]]
+  f_rhs_name <- as.character(call_rhs[[1]])
+  f_rhs_name <- f_rhs_name[!f_rhs_name %in% c("::","parsel")]
 
   all_args_rhs <- as.list(
-    rlang::fn_fmls(get(f_rhs_name))
+    rlang::fn_fmls(base::get(f_rhs_name, envir = as.environment("package:parsel")))
     )
 
   all_args_rhs <- all_args_rhs[-which(names(all_args_rhs) == "prev")]
