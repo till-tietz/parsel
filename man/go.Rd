@@ -2,12 +2,12 @@
 % Please edit documentation in R/constructors_navigation.R
 \name{go}
 \alias{go}
-\title{wrapper around remDr$mavigate to generate safe navigation code}
+\title{wrapper around remDr$mavigate method to generate safe navigation code}
 \usage{
 go(url, prev = NULL)
 }
 \arguments{
-\item{url}{a character string specifying the name of the variable holding the url string or the url string the function should navigate to.}
+\item{url}{a character string specifying the name of the object holding the url string or the url string the function should navigate to.}
 
 \item{prev}{a placeholder for the output of functions being piped into go(). Defaults to NULL and should not be altered.}
 }
@@ -15,12 +15,13 @@ go(url, prev = NULL)
 a character string defining 'RSelenium' navigation instructions that can be pasted into a scraping function
 }
 \description{
-wrapper around remDr$mavigate to generate safe navigation code
+wrapper around remDr$mavigate method to generate safe navigation code
 }
 \examples{
 \dontrun{
 
-go("https://www.wikipedia.org/")
+go("https://www.wikipedia.org/") \%>>\%
+show()
 
 }
 }

@@ -1,6 +1,6 @@
-#' wrapper around remDr$mavigate to generate safe navigation code
+#' wrapper around remDr$mavigate method to generate safe navigation code
 #'
-#' @param url a character string specifying the name of the variable holding the url string or the url string the function should navigate to.
+#' @param url a character string specifying the name of the object holding the url string or the url string the function should navigate to.
 #' @param prev a placeholder for the output of functions being piped into go(). Defaults to NULL and should not be altered.
 #' @return a character string defining 'RSelenium' navigation instructions that can be pasted into a scraping function
 #' @export
@@ -8,7 +8,8 @@
 #' @examples
 #' \dontrun{
 #'
-#' go("https://www.wikipedia.org/")
+#' go("https://www.wikipedia.org/") %>>%
+#' show()
 #'
 #' }
 
@@ -41,7 +42,7 @@ go <- function(url, prev = NULL){
   return(out)
 }
 
-#' wrapper around remDr$goBack to generate safe backwards navigation code
+#' wrapper around remDr$goBack method to generate safe backwards navigation code
 #'
 #' @param prev a placeholder for the output of functions being piped into goback(). Defaults to NULL and should not be altered.
 #' @return a character string defining 'RSelenium' backwards navigation instructions that can be pasted into a scraping function
@@ -50,7 +51,8 @@ go <- function(url, prev = NULL){
 #' @examples
 #' \dontrun{
 #'
-#' goback()
+#' goback() %>>%
+#' show()
 #'
 #' }
 
