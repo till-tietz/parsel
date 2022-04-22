@@ -147,7 +147,7 @@ wiki_text <- parsel::parscrape(scrape_fun = get_wiki_text,
 `parsel` allows you to generate scraping code and output it to the console via its wrapper functions around RSelenium methods. 
 We'll reproduce a slightly stripped down version of the RSelenium code in the above wikipedia scraping routine via the `parsel` `constructor` `functions`. 
 
-```{r, warning = FALSE}
+```{r, warning = FALSE, message = FALSE}
 library(parsel)
 
 go(url = "x") %>>%

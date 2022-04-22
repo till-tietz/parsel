@@ -157,11 +157,7 @@ above wikipedia scraping routine via the `parsel` `constructor`
 
 ``` r
 library(parsel)
-#> 
-#> Attache Paket: 'parsel'
-#> Das folgende Objekt ist maskiert 'package:methods':
-#> 
-#>     show
+
 go(url = "x") %>>%
   click(using = "xpath", value = "/html/body/div[5]/div[2]/nav[1]/div/ul/li[3]/a", name = "rand_art") %>>%
 get_element(using = "id", value = "firstHeading", name = "title") %>>%
