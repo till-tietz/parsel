@@ -152,11 +152,11 @@ library(parsel)
 
 go(url = "x") %>>%
   click(using = "xpath", value = "/html/body/div[5]/div[2]/nav[1]/div/ul/li[3]/a", name = "rand_art") %>>%
-get_element(using = "id", value = "firstHeading", name = "title") %>>%
-  parsel::click(using = "xpath", value = "/html/body/div[3]/div[3]/div[5]/div[1]/p[1]/a[1]", name = "link") %>>%
-  parsel::get_element(using = "id", value = "firstHeading", name = "first_link_title") %>>%
-  parsel::get_element(using = "xpath", value = "/html/body/div[3]/div[3]/div[5]/div[1]/p[1]", name = "first_link_text") %>>%
-  parsel::show()
+  get_element(using = "id", value = "firstHeading", name = "title") %>>%
+  click(using = "xpath", value = "/html/body/div[3]/div[3]/div[5]/div[1]/p[1]/a[1]", name = "link") %>>%
+  get_element(using = "id", value = "firstHeading", name = "first_link_title") %>>%
+  get_element(using = "xpath", value = "/html/body/div[3]/div[3]/div[5]/div[1]/p[1]", name = "first_link_text") %>>%
+  show()
   
 
 ```
