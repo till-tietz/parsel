@@ -251,7 +251,7 @@ type <- function(using, value, name = NULL, text, text_object, prev = NULL){
 #'
 #' }
 
-get_elemnt <- function(using, value, name = NULL, prev = NULL){
+get_element <- function(using, value, name = NULL, prev = NULL){
 
   if(!missing(using)){
     if(!is.character(using)){

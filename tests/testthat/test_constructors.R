@@ -39,9 +39,9 @@ testthat::test_that(
 testthat::test_that(
   "constructors get_element() input handling",
   {
-    expect_error(get_elemnt(using = 1, value = "a"))
-    expect_error(get_elemnt(using = "a", value = 1))
-    expect_error(get_elemnt(using = "a", value = "a", name = 1))
+    expect_error(get_element(using = 1, value = "a"))
+    expect_error(get_element(using = "a", value = 1))
+    expect_error(get_element(using = "a", value = "a", name = 1))
   }
 )
 
