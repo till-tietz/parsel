@@ -29,6 +29,7 @@ gen_varname <- function(input){
 #' @param using character string specifying locator scheme to use to search elements. Available schemes: "class name", "css selector", "id", "name", "link text", "partial link text", "tag name", "xpath".
 #' @param value character string specifying the search target.
 #' @param name character string specifying the object name the RSelenium "wElement" class object should be saved to.
+#' @param new_page logical indicating if clickElement() action will resullt in a change in url.
 #' @param prev a placeholder for the output of functions being piped into click(). Defaults to NULL and should not be altered.
 #' @return a character string defining 'RSelenium' clicking instructions that can be pasted into a scraping function.
 #' @export
@@ -44,7 +45,7 @@ gen_varname <- function(input){
 #'
 #' }
 
-click <- function(using, value, name = NULL, prev = NULL){
+click <- function(using, value, name = NULL, new_page = FALSE, prev = NULL){
 
   if(!missing(using)){
     if(!is.character(using)){
@@ -74,10 +75,37 @@ click <- function(using, value, name = NULL, prev = NULL){
 
   }
 
+  if(!is.logical(new_page)){
+    stop("new_page is not of type logical")
+  }
+
+
   finding <- paste(name, " <- ","remDr$findElement(using = '", using,"', '", value, "')", sep = "")
   clicking <- paste(name,"$clickElement()", sep = "")
 
-  out <- paste(finding, clicking, sep = "\n")
+  if(new_page){
+
+    from <- "from <- seleniumPipes::getCurrentUrl(remDr)"
+
+    wait <- paste("not_changed <- TRUE",
+                  "while(not_changed){",
+                  "Sys.sleep(0.25)",
+                  "current <- seleniumPipes::getCurrentUrl(remDr)",
+                  "if(current != from){",
+                  "not_changed <- FALSE",
+                  "}",
+                  "}",
+                  sep = "\n")
+
+    out <- paste(finding, from, clicking, wait, sep = "\n")
+
+  } else {
+
+    wait <- "Sys.sleep(0.25)"
+
+    out <- paste(finding, clicking, wait, sep = "\n")
+
+  }
 
   if(!is.null(prev)){
     out <- paste(prev, out, sep = " \n \n ")
@@ -97,6 +125,7 @@ click <- function(using, value, name = NULL, prev = NULL){
 #' @param name character string specifying the object name the RSelenium "wElement" class object should be saved to.If NULL a name will be generated automatically.
 #' @param text a character vector specifying the text to be typed.
 #' @param text_object a character string specifying the name of an external object holding the text to be typed. Note that the remDr$sendKeysToElement method only accepts list inputs.
+#' @param new_page logical indicating if sendKeysToElement() action will resullt in a change in url.
 #' @param prev a placeholder for the output of functions being piped into type(). Defaults to NULL and should not be altered.
 #' @return a character string defining 'RSelenium' typing instructions that can be pasted into a scraping function.
 #' @export
@@ -124,7 +153,7 @@ click <- function(using, value, name = NULL, prev = NULL){
 #'
 #' }
 
-type <- function(using, value, name = NULL, text, text_object, prev = NULL){
+type <- function(using, value, name = NULL, text, text_object, new_page = FALSE, prev = NULL){
 
   if(!missing(using)){
     if(!is.character(using)){
@@ -187,6 +216,10 @@ type <- function(using, value, name = NULL, text, text_object, prev = NULL){
 
   }
 
+  if(!is.logical(new_page)){
+    stop("new_page is not of type logical")
+  }
+
 
   finding <- paste(name, " <- ","remDr$findElement(using = '", using,"', '", value, "')", sep = "")
 
@@ -200,7 +233,29 @@ type <- function(using, value, name = NULL, text, text_object, prev = NULL){
 
   }
 
-  out <- paste(finding, typing, sep = "\n")
+  if(new_page){
+
+    from <- "from <- seleniumPipes::getCurrentUrl(remDr)"
+
+    wait <- paste("not_changed <- TRUE",
+                  "while(not_changed){",
+                  "Sys.sleep(0.25)",
+                  "current <- seleniumPipes::getCurrentUrl(remDr)",
+                  "if(current != from){",
+                  "not_changed <- FALSE",
+                  "}",
+                  "}",
+                  sep = "\n")
+
+    out <- paste(finding, from, typing, wait, sep = "\n")
+
+  } else {
+
+    wait <- "Sys.sleep(0.25)"
+
+    out <- paste(finding, typing, wait, sep = "\n")
+
+  }
 
   if(!is.null(prev)){
     out <- paste(prev, out, sep = " \n \n ")

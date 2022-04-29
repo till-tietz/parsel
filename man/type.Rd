@@ -4,7 +4,15 @@
 \alias{type}
 \title{wrapper around sendKeysToElement() method to generate safe scraping code}
 \usage{
-type(using, value, name = NULL, text, text_object, prev = NULL)
+type(
+  using,
+  value,
+  name = NULL,
+  text,
+  text_object,
+  new_page = FALSE,
+  prev = NULL
+)
 }
 \arguments{
 \item{using}{character string specifying locator scheme to use to search elements. Available schemes: "class name", "css selector", "id", "name", "link text", "partial link text", "tag name", "xpath".}
@@ -16,6 +24,8 @@ type(using, value, name = NULL, text, text_object, prev = NULL)
 \item{text}{a character vector specifying the text to be typed.}
 
 \item{text_object}{a character string specifying the name of an external object holding the text to be typed. Note that the remDr$sendKeysToElement method only accepts list inputs.}
+
+\item{new_page}{logical indicating if sendKeysToElement() action will resullt in a change in url.}
 
 \item{prev}{a placeholder for the output of functions being piped into type(). Defaults to NULL and should not be altered.}
 }
