@@ -4,7 +4,7 @@
 \alias{click}
 \title{wrapper around clickElement() method to generate safe scraping code}
 \usage{
-click(using, value, name = NULL, prev = NULL)
+click(using, value, name = NULL, new_page = FALSE, prev = NULL)
 }
 \arguments{
 \item{using}{character string specifying locator scheme to use to search elements. Available schemes: "class name", "css selector", "id", "name", "link text", "partial link text", "tag name", "xpath".}
@@ -12,6 +12,8 @@ click(using, value, name = NULL, prev = NULL)
 \item{value}{character string specifying the search target.}
 
 \item{name}{character string specifying the object name the RSelenium "wElement" class object should be saved to.}
+
+\item{new_page}{logical indicating if clickElement() action will resullt in a change in url.}
 
 \item{prev}{a placeholder for the output of functions being piped into click(). Defaults to NULL and should not be altered.}
 }
