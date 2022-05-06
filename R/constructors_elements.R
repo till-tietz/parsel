@@ -272,6 +272,7 @@ type <- function(using, value, name = NULL, text, text_object, new_page = FALSE,
 #' @param value character string specifying the search target.
 #' @param name character string specifying the object name the RSelenium "wElement" class object should be saved to. If NULL a name will be generated automatically.
 #' @param prev a placeholder for the output of functions being piped into get_element(). Defaults to NULL and should not be altered.
+#' @param multiple logical indicating whether multiple elements should be returned. If TRUE the findElements() method will be invoced.
 #' @return a character string defining 'RSelenium' getElementText() instructions that can be pasted into a scraping function.
 #' @export
 #'
@@ -306,7 +307,7 @@ type <- function(using, value, name = NULL, text, text_object, new_page = FALSE,
 #'
 #' }
 
-get_element <- function(using, value, name = NULL, prev = NULL){
+get_element <- function(using, value, name = NULL, multiple = FALSE, prev = NULL){
 
   if(!missing(using)){
     if(!is.character(using)){
@@ -326,6 +327,10 @@ get_element <- function(using, value, name = NULL, prev = NULL){
     }
   }
 
+  if(!is.logical(multiple)){
+    stop("multiple not of class logical")
+  }
+
   if(is.null(name)){
 
     if(is.null(prev)){
@@ -336,15 +341,34 @@ get_element <- function(using, value, name = NULL, prev = NULL){
 
   }
 
-  finding <- paste(name, " <- ", "try(", "remDr$findElement(using = '", using,"', '", value, "')", ")", sep = "")
 
-  out <- paste(finding,
-               paste("if(is(", name, ",'try-error')){", sep = ""),
-               paste(name, " <- NA", sep = ""),
-               "} else {",
-               paste(name, " <- ", name,"$getElementText()", sep = ""),
-               "}",
-               sep = " \n")
+  if(multiple == FALSE){
+
+    finding <- paste(name, " <- ", "try(", "remDr$findElement(using = '", using,"', '", value, "')", ")", sep = "")
+
+    out <- paste(finding,
+                 paste("if(is(", name, ",'try-error')){", sep = ""),
+                 paste(name, " <- NA", sep = ""),
+                 "} else {",
+                 paste(name, " <- ", name,"$getElementText()", sep = ""),
+                 "}",
+                 sep = " \n")
+
+  } else {
+
+    finding <- paste(name, " <- ", "try(", "remDr$findElements(using = '", using,"', '", value, "')", ")", sep = "")
+
+    out <- paste(finding,
+                 paste("if(is(", name, ",'try-error')){", sep = ""),
+                 paste(name, " <- NA", sep = ""),
+                 "} else {",
+                 paste(name, " <- ", "lapply(", name, ", function(i) ","i$getElementText())", sep = ""),
+                 "}",
+                 sep = " \n")
+
+  }
+
+
 
   if(!is.null(prev)){
     out <- paste(prev, out, sep = " \n \n ")

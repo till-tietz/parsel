@@ -4,7 +4,7 @@
 \alias{get_element}
 \title{wrapper around getElementText() method to generate safe scraping code}
 \usage{
-get_element(using, value, name = NULL, prev = NULL)
+get_element(using, value, name = NULL, multiple = FALSE, prev = NULL)
 }
 \arguments{
 \item{using}{character string specifying locator scheme to use to search elements. Available schemes: "class name", "css selector", "id", "name", "link text", "partial link text", "tag name", "xpath".}
@@ -12,6 +12,8 @@ get_element(using, value, name = NULL, prev = NULL)
 \item{value}{character string specifying the search target.}
 
 \item{name}{character string specifying the object name the RSelenium "wElement" class object should be saved to. If NULL a name will be generated automatically.}
+
+\item{multiple}{logical indicating whether multiple elements should be returned. If TRUE the findElements() method will be invoced.}
 
 \item{prev}{a placeholder for the output of functions being piped into get_element(). Defaults to NULL and should not be altered.}
 }

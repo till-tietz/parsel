@@ -44,6 +44,7 @@ testthat::test_that(
     expect_error(get_element(using = 1, value = "a"))
     expect_error(get_element(using = "a", value = 1))
     expect_error(get_element(using = "a", value = "a", name = 1))
+    expect_error(get_element(using = "a", value = "a", name = "a", multiple = 1))
   }
 )
 
