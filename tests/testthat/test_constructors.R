@@ -18,6 +18,7 @@ testthat::test_that(
     expect_error(click(using = 1, value = "a"))
     expect_error(click(using = "a", value = 1))
     expect_error(click(using = "a", value = "a", name = 1))
+    expect_error(click(using = "a", value = "a", new_page = 1))
   }
 )
 
@@ -32,6 +33,7 @@ testthat::test_that(
     expect_error(type(using = "a", value = "a", text = 1))
     expect_error(type(using = "a", value = "a", text_object = 1))
     expect_error(type(using = "a", value = "a", text_object = c("a","b")))
+    expect_error(type(using = "a", value = "a", text = "a", new_page = 1))
   }
 )
 
@@ -42,6 +44,7 @@ testthat::test_that(
     expect_error(get_element(using = 1, value = "a"))
     expect_error(get_element(using = "a", value = 1))
     expect_error(get_element(using = "a", value = "a", name = 1))
+    expect_error(get_element(using = "a", value = "a", name = "a", multiple = 1))
   }
 )
 
