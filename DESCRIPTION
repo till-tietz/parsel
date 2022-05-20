@@ -1,6 +1,6 @@
 Type: Package
 Package: parsel
-Title: Parallelized Dynamic Web-Scraping Using 'RSelenium'
+Title: Parallel Dynamic Web-Scraping Using 'RSelenium'
 Version: 0.1.1
 Authors@R: c(
     person("Till", "Tietz", email = "ttietz2014@gmail.com", role = c("cre","aut")))
