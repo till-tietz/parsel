@@ -342,19 +342,7 @@ get_element <- function(using, value, name = NULL, multiple = FALSE, prev = NULL
   }
 
 
-  if(multiple == FALSE){
-
-    finding <- paste(name, " <- ", "try(", "remDr$findElement(using = '", using,"', '", value, "')", ")", sep = "")
-
-    out <- paste(finding,
-                 paste("if(is(", name, ",'try-error')){", sep = ""),
-                 paste(name, " <- NA", sep = ""),
-                 "} else {",
-                 paste(name, " <- ", name,"$getElementText()", sep = ""),
-                 "}",
-                 sep = " \n")
-
-  } else {
+  if(multiple){
 
     finding <- paste(name, " <- ", "try(", "remDr$findElements(using = '", using,"', '", value, "')", ")", sep = "")
 
@@ -366,9 +354,19 @@ get_element <- function(using, value, name = NULL, multiple = FALSE, prev = NULL
                  "}",
                  sep = " \n")
 
+  } else {
+
+    finding <- paste(name, " <- ", "try(", "remDr$findElement(using = '", using,"', '", value, "')", ")", sep = "")
+
+    out <- paste(finding,
+                 paste("if(is(", name, ",'try-error')){", sep = ""),
+                 paste(name, " <- NA", sep = ""),
+                 "} else {",
+                 paste(name, " <- ", name,"$getElementText()", sep = ""),
+                 "}",
+                 sep = " \n")
+
   }
-
-
 
   if(!is.null(prev)){
     out <- paste(prev, out, sep = " \n \n ")

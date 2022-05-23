@@ -82,3 +82,43 @@ goback <- function(prev = NULL){
   return(out)
 }
 
+
+#' wrapper around remDr$goForward method to generate safe forwards navigation code
+#'
+#' @param prev a placeholder for the output of functions being puped into goforward(). Defaults to NULL and should not be altered.
+#' @return a character string defining 'RSelenium' forward navigation instructions that can be pasted into a scraping function.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'
+#' goforward() %>>%
+#' show()
+#'
+#' }
+
+goforward <- function(prev = NULL){
+
+  not_forward <- "not_forward <- TRUE"
+
+  from <- "from <- seleniumPipes::getCurrentUrl(remDr)"
+
+  go_forward <- "remDr$goForward()"
+
+  while_loop <- paste("while(not_forward){",
+                      "Sys.sleep(0.25)",
+                      "current <- seleniumPipes::getCurrentUrl(remDr)",
+                      "if(current != from){",
+                      "not_forward <- FALSE",
+                      "}",
+                      "}",
+                      sep = "\n")
+
+  out <- paste("# navigate forward to new url", not_forward, from, go_forward, while_loop, sep = "\n")
+
+  if(!is.null(prev)){
+    out <- paste(prev, out, sep = " \n \n ")
+  }
+
+  return(out)
+}
