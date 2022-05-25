@@ -25,7 +25,7 @@ type(
 
 \item{text_object}{a character string specifying the name of an external object holding the text to be typed. Note that the remDr$sendKeysToElement method only accepts list inputs.}
 
-\item{new_page}{logical indicating if sendKeysToElement() action will resullt in a change in url.}
+\item{new_page}{logical indicating if sendKeysToElement() action will result in a change in url.}
 
 \item{prev}{a placeholder for the output of functions being piped into type(). Defaults to NULL and should not be altered.}
 }
