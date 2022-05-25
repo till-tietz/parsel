@@ -13,7 +13,7 @@ click(using, value, name = NULL, new_page = FALSE, prev = NULL)
 
 \item{name}{character string specifying the object name the RSelenium "wElement" class object should be saved to.}
 
-\item{new_page}{logical indicating if clickElement() action will resullt in a change in url.}
+\item{new_page}{logical indicating if clickElement() action will result in a change in url.}
 
 \item{prev}{a placeholder for the output of functions being piped into click(). Defaults to NULL and should not be altered.}
 }
