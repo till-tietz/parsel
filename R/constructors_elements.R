@@ -271,7 +271,7 @@ type <- function(using, value, name = NULL, text, text_object, new_page = FALSE,
 #' @param using character string specifying locator scheme to use to search elements. Available schemes: "class name", "css selector", "id", "name", "link text", "partial link text", "tag name", "xpath".
 #' @param value character string specifying the search target.
 #' @param name character string specifying the object name the RSelenium "wElement" class object should be saved to. If NULL a name will be generated automatically.
-#' @param multiple logical indicating whether multiple elements should be returned. If TRUE the findElements() method will be invoced.
+#' @param multiple logical indicating whether multiple elements should be returned. If TRUE the findElements() method will be invoked.
 #' @param prev a placeholder for the output of functions being piped into get_element(). Defaults to NULL and should not be altered.
 #' @return a character string defining 'RSelenium' getElementText() instructions that can be pasted into a scraping function.
 #' @export

@@ -2,7 +2,7 @@
 % Please edit documentation in R/constructors_navigation.R
 \name{go}
 \alias{go}
-\title{wrapper around remDr$mavigate method to generate safe navigation code}
+\title{wrapper around remDr$navigate method to generate safe navigation code}
 \usage{
 go(url, prev = NULL)
 }
@@ -15,7 +15,7 @@ go(url, prev = NULL)
 a character string defining 'RSelenium' navigation instructions that can be pasted into a scraping function
 }
 \description{
-wrapper around remDr$mavigate method to generate safe navigation code
+wrapper around remDr$navigate method to generate safe navigation code
 }
 \examples{
 \dontrun{
