@@ -7,7 +7,7 @@
 goforward(prev = NULL)
 }
 \arguments{
-\item{prev}{a placeholder for the output of functions being puped into goforward(). Defaults to NULL and should not be altered.}
+\item{prev}{a placeholder for the output of functions being piped into goforward(). Defaults to NULL and should not be altered.}
 }
 \value{
 a character string defining 'RSelenium' forward navigation instructions that can be pasted into a scraping function.

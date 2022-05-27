@@ -1,7 +1,7 @@
-#' pipe-like operator that passes the ouput of lhs to the prev argument of rhs to paste together a scraper function in sequence.
+#' pipe-like operator that passes the output of lhs to the prev argument of rhs to paste together a scraper function in sequence.
 #'
 #' @param lhs a parsel constructor function call
-#' @param rhs a parsel constructor fuction call that should accept lhs as its prev argument
+#' @param rhs a parsel constructor function call that should accept lhs as its prev argument
 #' @return the output of rhs evaluated with lhs as the prev argument
 #' @export
 #'

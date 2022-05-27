@@ -1,4 +1,4 @@
-#' wrapper around remDr$mavigate method to generate safe navigation code
+#' wrapper around remDr$navigate method to generate safe navigation code
 #'
 #' @param url a character string specifying the name of the object holding the url string or the url string the function should navigate to.
 #' @param prev a placeholder for the output of functions being piped into go(). Defaults to NULL and should not be altered.
@@ -85,7 +85,7 @@ goback <- function(prev = NULL){
 
 #' wrapper around remDr$goForward method to generate safe forwards navigation code
 #'
-#' @param prev a placeholder for the output of functions being puped into goforward(). Defaults to NULL and should not be altered.
+#' @param prev a placeholder for the output of functions being piped into goforward(). Defaults to NULL and should not be altered.
 #' @return a character string defining 'RSelenium' forward navigation instructions that can be pasted into a scraping function.
 #' @export
 #'

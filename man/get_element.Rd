@@ -13,7 +13,7 @@ get_element(using, value, name = NULL, multiple = FALSE, prev = NULL)
 
 \item{name}{character string specifying the object name the RSelenium "wElement" class object should be saved to. If NULL a name will be generated automatically.}
 
-\item{multiple}{logical indicating whether multiple elements should be returned. If TRUE the findElements() method will be invoced.}
+\item{multiple}{logical indicating whether multiple elements should be returned. If TRUE the findElements() method will be invoked.}
 
 \item{prev}{a placeholder for the output of functions being piped into get_element(). Defaults to NULL and should not be altered.}
 }
