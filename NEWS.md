@@ -1,4 +1,4 @@
-#parsel 0.2.0
+# parsel 0.2.0
 
 * Added 'RSelenium' constructor functions. These functions are wrappers around 'RSelenium' methods that allow you to quickly and easily render safe, ready to use
 'RSelenium' scraping code to the console and paste it into your scraping functions. 
