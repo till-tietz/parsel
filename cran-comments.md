@@ -1,11 +1,4 @@
-## Resubmission 
-This is a resubmission. In this version I have: 
-
-* written all package names in single quotes. Changed RSelenium to 'RSelenium' in Description title. 
-* added \value tag to close_rselenium.Rd
-* converted close_rselenium to internal function
-* added executable example to parscrape.Rd
-* ensured that examples and tests use at most 2 cores 
+This is a minor release introducing new user facing functionality. 
 
 ## Test environments
 * local Windows install, R 4.1.1
@@ -18,6 +11,6 @@ This is a resubmission. In this version I have:
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 note
 
-* This is a new release.
+
