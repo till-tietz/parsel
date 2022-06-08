@@ -41,3 +41,11 @@ testthat::test_that(
   }
 )
 
+testthat::test_that(
+  "extraCapabilities only accepts list",
+  {
+    f <- function(){}
+    expect_error(parsel::parscrape(scrape_fun = f, scrape_input = c(1:10), browser = "firefox", extraCapabilities = "a"))
+  }
+)
+

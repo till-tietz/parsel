@@ -39,7 +39,16 @@
 #'}
 
 
-parscrape <- function(scrape_fun, scrape_input, cores = NULL, packages = c("base"), browser, ports = NULL, chunk_size = NULL, scrape_tries = 1, proxy = NULL, extraCapabilities = list()) {
+parscrape <- function(scrape_fun,
+                      scrape_input,
+                      cores = NULL,
+                      packages = c("base"),
+                      browser,
+                      ports = NULL,
+                      chunk_size = NULL,
+                      scrape_tries = 1,
+                      proxy = NULL,
+                      extraCapabilities = list()) {
 
 
   if(!is.function(scrape_fun)){

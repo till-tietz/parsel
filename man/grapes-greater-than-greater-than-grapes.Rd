@@ -2,20 +2,20 @@
 % Please edit documentation in R/constructors_pipe.R
 \name{\%>>\%}
 \alias{\%>>\%}
-\title{pipe-like operator that passes the ouput of lhs to the prev argument of rhs to paste together a scraper function in sequence.}
+\title{pipe-like operator that passes the output of lhs to the prev argument of rhs to paste together a scraper function in sequence.}
 \usage{
 lhs \%>>\% rhs
 }
 \arguments{
 \item{lhs}{a parsel constructor function call}
 
-\item{rhs}{a parsel constructor fuction call that should accept lhs as its prev argument}
+\item{rhs}{a parsel constructor function call that should accept lhs as its prev argument}
 }
 \value{
 the output of rhs evaluated with lhs as the prev argument
 }
 \description{
-pipe-like operator that passes the ouput of lhs to the prev argument of rhs to paste together a scraper function in sequence.
+pipe-like operator that passes the output of lhs to the prev argument of rhs to paste together a scraper function in sequence.
 }
 \examples{
 \dontrun{
