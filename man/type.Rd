@@ -42,7 +42,7 @@ wrapper around sendKeysToElement() method to generate safe scraping code
 
 parsel::go("https://www.wikipedia.org/") \%>>\%
 parsel::type(using = "id",
-             value = "searchInput",
+             value = "'searchInput'",
              name = "searchbox",
              text = c("Hello","\uE007")) \%>>\%
              show()
@@ -51,7 +51,7 @@ parsel::type(using = "id",
 
 parsel::go("https://www.wikipedia.org/") \%>>\%
 parsel::type(using = "id",
-             value = "searchInput",
+             value = "'searchInput'",
              name = "searchbox",
              text_object = "x") \%>>\%
              show()
