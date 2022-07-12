@@ -29,7 +29,7 @@ wrapper around clickElement() method to generate safe scraping code
 #navigate to wikipedia, click random article
 
 parsel::go("https://www.wikipedia.org/") \%>>\%
-parsel::click(using = "id", value = "n-randompage") \%>>\%
+parsel::click(using = "id", value = "'n-randompage'") \%>>\%
 show()
 
 }

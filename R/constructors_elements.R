@@ -40,7 +40,7 @@ gen_varname <- function(input){
 #' #navigate to wikipedia, click random article
 #'
 #' parsel::go("https://www.wikipedia.org/") %>>%
-#' parsel::click(using = "id", value = "n-randompage") %>>%
+#' parsel::click(using = "id", value = "'n-randompage'") %>>%
 #' show()
 #'
 #' }
@@ -80,17 +80,17 @@ click <- function(using, value, name = NULL, new_page = FALSE, prev = NULL){
   }
 
 
-  finding <- paste(name, " <- ","remDr$findElement(using = '", using,"', '", value, "')", sep = "")
+  finding <- paste(name, " <- ","remDr$findElement(using = '", using,"', ", value, ")", sep = "")
   clicking <- paste(name,"$clickElement()", sep = "")
 
   if(new_page){
 
-    from <- "from <- seleniumPipes::getCurrentUrl(remDr)"
+    from <- "from <- remDr$getCurrentUrl()[[1]]"
 
     wait <- paste("not_changed <- TRUE",
                   "while(not_changed){",
                   "Sys.sleep(0.25)",
-                  "current <- seleniumPipes::getCurrentUrl(remDr)",
+                  "current <- remDr$getCurrentUrl()[[1]]",
                   "if(current != from){",
                   "not_changed <- FALSE",
                   "}",
@@ -137,7 +137,7 @@ click <- function(using, value, name = NULL, new_page = FALSE, prev = NULL){
 #'
 #' parsel::go("https://www.wikipedia.org/") %>>%
 #' parsel::type(using = "id",
-#'              value = "searchInput",
+#'              value = "'searchInput'",
 #'              name = "searchbox",
 #'              text = c("Hello","\uE007")) %>>%
 #'              show()
@@ -146,7 +146,7 @@ click <- function(using, value, name = NULL, new_page = FALSE, prev = NULL){
 #'
 #' parsel::go("https://www.wikipedia.org/") %>>%
 #' parsel::type(using = "id",
-#'              value = "searchInput",
+#'              value = "'searchInput'",
 #'              name = "searchbox",
 #'              text_object = "x") %>>%
 #'              show()
@@ -221,7 +221,7 @@ type <- function(using, value, name = NULL, text, text_object, new_page = FALSE,
   }
 
 
-  finding <- paste(name, " <- ","remDr$findElement(using = '", using,"', '", value, "')", sep = "")
+  finding <- paste(name, " <- ","remDr$findElement(using = '", using,"', ", value, ")", sep = "")
 
   if(defined == 1){
 
@@ -235,12 +235,12 @@ type <- function(using, value, name = NULL, text, text_object, new_page = FALSE,
 
   if(new_page){
 
-    from <- "from <- seleniumPipes::getCurrentUrl(remDr)"
+    from <- "from <- remDr$getCurrentUrl()[[1]]"
 
     wait <- paste("not_changed <- TRUE",
                   "while(not_changed){",
                   "Sys.sleep(0.25)",
-                  "current <- seleniumPipes::getCurrentUrl(remDr)",
+                  "current <- remDr$getCurrentUrl()[[1]]",
                   "if(current != from){",
                   "not_changed <- FALSE",
                   "}",
@@ -284,11 +284,11 @@ type <- function(using, value, name = NULL, text, text_object, new_page = FALSE,
 #'
 #' parsel::go("https://www.wikipedia.org/") %>>%
 #' parsel::type(using = "id",
-#'              value = "searchInput",
+#'              value = "'searchInput'",
 #'              name = "searchbox",
 #'              text = c("Hello","\uE007")) %>>%
 #' parsel::get_element(using = "id",
-#'                     value = "firstHeading",
+#'                     value = "'firstHeading'",
 #'                     name = "header") %>>%
 #'             show()
 #'
@@ -297,11 +297,11 @@ type <- function(using, value, name = NULL, text, text_object, new_page = FALSE,
 #'
 #' parsel::go("https://www.wikipedia.org/") %>>%
 #' parsel::type(using = "id",
-#'              value = "searchInput",
+#'              value = "'searchInput'",
 #'              name = "searchbox",
 #'              text = c("Hello","\uE007")) %>>%
 #' parsel::get_element(using = "id",
-#'                     value = "firstHeading",
+#'                     value = "'firstHeading'",
 #'                     name = "x[,1]") %>>%
 #'                     show()
 #'
@@ -344,25 +344,25 @@ get_element <- function(using, value, name = NULL, multiple = FALSE, prev = NULL
 
   if(multiple){
 
-    finding <- paste(name, " <- ", "try(", "remDr$findElements(using = '", using,"', '", value, "')", ")", sep = "")
+    finding <- paste(name, " <- ", "try(", "remDr$findElements(using = '", using,"', ", value, ")", ")", sep = "")
 
     out <- paste(finding,
                  paste("if(is(", name, ",'try-error')){", sep = ""),
                  paste(name, " <- NA", sep = ""),
                  "} else {",
-                 paste(name, " <- ", "lapply(", name, ", function(i) ","i$getElementText())", sep = ""),
+                 paste(name, " <- ", "lapply(", name, ", function(i) ","i$getElementText()[[1]])", sep = ""),
                  "}",
                  sep = " \n")
 
   } else {
 
-    finding <- paste(name, " <- ", "try(", "remDr$findElement(using = '", using,"', '", value, "')", ")", sep = "")
+    finding <- paste(name, " <- ", "try(", "remDr$findElement(using = '", using,"', ", value, ")", ")", sep = "")
 
     out <- paste(finding,
                  paste("if(is(", name, ",'try-error')){", sep = ""),
                  paste(name, " <- NA", sep = ""),
                  "} else {",
-                 paste(name, " <- ", name,"$getElementText()", sep = ""),
+                 paste(name, " <- ", name,"$getElementText()[[1]]", sep = ""),
                  "}",
                  sep = " \n")
 

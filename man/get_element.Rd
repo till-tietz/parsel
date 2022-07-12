@@ -31,11 +31,11 @@ wrapper around getElementText() method to generate safe scraping code
 
 parsel::go("https://www.wikipedia.org/") \%>>\%
 parsel::type(using = "id",
-             value = "searchInput",
+             value = "'searchInput'",
              name = "searchbox",
              text = c("Hello","\uE007")) \%>>\%
 parsel::get_element(using = "id",
-                    value = "firstHeading",
+                    value = "'firstHeading'",
                     name = "header") \%>>\%
             show()
 
@@ -44,11 +44,11 @@ parsel::get_element(using = "id",
 
 parsel::go("https://www.wikipedia.org/") \%>>\%
 parsel::type(using = "id",
-             value = "searchInput",
+             value = "'searchInput'",
              name = "searchbox",
              text = c("Hello","\uE007")) \%>>\%
 parsel::get_element(using = "id",
-                    value = "firstHeading",
+                    value = "'firstHeading'",
                     name = "x[,1]") \%>>\%
                     show()
 
