@@ -182,10 +182,14 @@ parscrape <- function(scrape_fun,
   unscraped_chunks <- which(!sapply(error_list,is.null))
 
   if(length(unscraped_chunks) > 0){
+
+    element_input_id <- unlist(chunks[unscraped_chunks])
+    n_elements <- length(element_input_id)
+
     unscraped <- data.frame(
-      element_input_id = unlist(chunks[unscraped_chunks]),
-      element_chunk = rep(unscraped_chunks, each = chunk_size),
-      error = rep(unlist(error_list), each = chunk_size)
+      element_input_id = element_input_id,
+      element_chunk = rep(unscraped_chunks, each = chunk_size)[1:n_elements],
+      error = rep(unlist(error_list), each = chunk_size)[1:n_elements]
     )
 
     warning("parscrape could not scrape certain elements. Check under not_scraped in the function output for element ids and errors.")
