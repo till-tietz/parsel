@@ -22,7 +22,7 @@ go <- function(url, prev = NULL){
 
   not_loaded <- "not_loaded <- TRUE"
 
-  navigate <- paste("remDr$navigate('",url,"')", sep = "")
+  navigate <- paste("remDr$navigate(",url,")", sep = "")
 
   while_loop <- paste("while(not_loaded){",
                       "Sys.sleep(0.25)",
