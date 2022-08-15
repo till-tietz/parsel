@@ -27,7 +27,7 @@ go <- function(url, prev = NULL){
   while_loop <- paste("while(not_loaded){",
                       "Sys.sleep(0.25)",
                       "current <- remDr$getCurrentUrl()[[1]]",
-                      paste("if(current == '",url,"'){", sep = ""),
+                      paste("if(current == ",url,"){", sep = ""),
                       "not_loaded <- FALSE",
                       "}",
                       "}",
