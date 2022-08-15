@@ -57,8 +57,6 @@ and parallelize it with `parsel`.
 2.  some input `x` to those actions (e.g. search terms to be entered in
     search boxes or links to navigate to etc.)
 
-<!-- end list -->
-
 ``` r
 library(RSelenium)
 library(parsel)
@@ -76,12 +74,10 @@ get_wiki_text <- function(x){
   remDr$navigate(input_i)
   
   #find and click random article 
-  rand_art <- remDr$findElement(using = "xpath", "/html/body/div[5]/div[2]/nav[1]/div/ul/li[3]/a")
-  rand_art$clickElement()
+  rand_art <- remDr$findElement(using = "id", "n-randompage")$clickElement()
   
   #get random article title 
-  title <- remDr$findElement(using = "id", "firstHeading")
-  title <- title$getElementText()[[1]]
+  title <- remDr$findElement(using = "id", "firstHeading")$getElementText()[[1]]
   
   #check if there is a linked page
   link_exists <- try(remDr$findElement(using = "xpath", "/html/body/div[3]/div[3]/div[5]/div[1]/p[1]/a[1]"))
@@ -90,28 +86,25 @@ get_wiki_text <- function(x){
   if(is(link_exists,"try-error")){
     first_link_title <- NA
     first_link_text <- NA
-  
-  #if there is a linked page
+    
+    #if there is a linked page
   } else {
     #click on link
-    link <- remDr$findElement(using = "xpath", "/html/body/div[3]/div[3]/div[5]/div[1]/p[1]/a[1]")
-    link$clickElement()
+    link <- remDr$findElement(using = "xpath", "/html/body/div[3]/div[3]/div[5]/div[1]/p[1]/a[1]")$clickElement()
     
     #get link page title
-    title_exists <- try(remDr$findElement(using = "id", "firstHeading"))
-    if(is(title_exists,"try-error")){
+    first_link_title <- try(remDr$findElement(using = "id", "firstHeading"))
+    if(is(first_link_title,"try-error")){
       first_link_title <- NA
     }else{
-      first_link_title <- remDr$findElement(using = "id", "firstHeading")
       first_link_title <- first_link_title$getElementText()[[1]]
     }
     
     #get 1st section of link page
-    text_exists <- try(remDr$findElement(using = "xpath", "/html/body/div[3]/div[3]/div[5]/div[1]/p[1]"))
-    if(is(text_exists,"try-error")){
+    first_link_text <- try(remDr$findElement(using = "xpath", "/html/body/div[3]/div[3]/div[5]/div[1]/p[1]"))
+    if(is(first_link_text,"try-error")){
       first_link_text <- NA
     }else{
-      first_link_text <- remDr$findElement(using = "xpath", "/html/body/div[3]/div[3]/div[5]/div[1]/p[1]")
       first_link_text <- first_link_text$getElementText()[[1]]
     }
   }
@@ -159,47 +152,49 @@ above wikipedia scraping routine via the `parsel` `constructor`
 library(parsel)
 
 go(url = "x") %>>%
-  click(using = "xpath", value = "/html/body/div[5]/div[2]/nav[1]/div/ul/li[3]/a", name = "rand_art") %>>%
-  get_element(using = "id", value = "firstHeading", name = "title") %>>%
-  click(using = "xpath", value = "/html/body/div[3]/div[3]/div[5]/div[1]/p[1]/a[1]", name = "link") %>>%
-  get_element(using = "id", value = "firstHeading", name = "first_link_title") %>>%
-  get_element(using = "xpath", value = "/html/body/div[3]/div[3]/div[5]/div[1]/p[1]", name = "first_link_text") %>>%
+  click(using = "id", value = "'n-randompage'", name = "rand_art") %>>%
+  get_element(using = "id", value = "'firstHeading'", name = "title") %>>%
+  click(using = "xpath", value = "'/html/body/div[3]/div[3]/div[5]/div[1]/p[1]/a[1]'", name = "link") %>>%
+  get_element(using = "id", value = "'firstHeading'", name = "first_link_title") %>>%
+  get_element(using = "xpath", value = "'/html/body/div[3]/div[3]/div[5]/div[1]/p[1]'", name = "first_link_text") %>>%
   show()
 #> # navigate to url
 #> not_loaded <- TRUE
-#> remDr$navigate('x')
+#> remDr$navigate(x)
 #> while(not_loaded){
 #> Sys.sleep(0.25)
-#> current <- seleniumPipes::getCurrentUrl(remDr)
-#> if(current == 'x'){
+#> current <- remDr$getCurrentUrl()[[1]]
+#> if(current == x){
 #> not_loaded <- FALSE
 #> }
 #> } 
 #>  
-#>  rand_art <- remDr$findElement(using = 'xpath', '/html/body/div[5]/div[2]/nav[1]/div/ul/li[3]/a')
-#> rand_art$clickElement() 
+#>  rand_art <- remDr$findElement(using = 'id', 'n-randompage')
+#> rand_art$clickElement()
+#> Sys.sleep(0.25) 
 #>  
 #>  title <- try(remDr$findElement(using = 'id', 'firstHeading')) 
 #> if(is(title,'try-error')){ 
 #> title <- NA 
 #> } else { 
-#> title <- title$getElementText() 
+#> title <- title$getElementText()[[1]] 
 #> } 
 #>  
 #>  link <- remDr$findElement(using = 'xpath', '/html/body/div[3]/div[3]/div[5]/div[1]/p[1]/a[1]')
-#> link$clickElement() 
+#> link$clickElement()
+#> Sys.sleep(0.25) 
 #>  
 #>  first_link_title <- try(remDr$findElement(using = 'id', 'firstHeading')) 
 #> if(is(first_link_title,'try-error')){ 
 #> first_link_title <- NA 
 #> } else { 
-#> first_link_title <- first_link_title$getElementText() 
+#> first_link_title <- first_link_title$getElementText()[[1]] 
 #> } 
 #>  
 #>  first_link_text <- try(remDr$findElement(using = 'xpath', '/html/body/div[3]/div[3]/div[5]/div[1]/p[1]')) 
 #> if(is(first_link_text,'try-error')){ 
 #> first_link_text <- NA 
 #> } else { 
-#> first_link_text <- first_link_text$getElementText() 
+#> first_link_text <- first_link_text$getElementText()[[1]] 
 #> }
 ```
