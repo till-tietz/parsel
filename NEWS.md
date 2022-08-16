@@ -1,3 +1,7 @@
+# parsel 0.2.1
+
+* fixed `parscrape` row number mismatch bug in the construction of the unscraped data.frame when chunks contain different numbers of scrape elements. 
+
 # parsel 0.2.0
 
 * Added 'RSelenium' constructor functions. These functions are wrappers around 'RSelenium' methods that allow you to quickly and easily render safe, ready to use
