@@ -8,6 +8,8 @@
 [![R-CMD-check](https://github.com/till-tietz/parsel/workflows/R-CMD-check/badge.svg)](https://github.com/till-tietz/parsel/actions)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/parsel)](https://CRAN.R-project.org/package=parsel)
+[![License:
+MIT](https://img.shields.io/badge/License-MIT-orange.svg)](https://opensource.org/licenses/MIT)
 ![](https://cranlogs.r-pkg.org/badges/grand-total/parsel?color)
 <!-- badges: end -->
 
