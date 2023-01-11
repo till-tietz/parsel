@@ -11,6 +11,7 @@ status](https://www.r-pkg.org/badges/version/parsel)](https://CRAN.R-project.org
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-orange.svg)](https://opensource.org/licenses/MIT)
 ![](https://cranlogs.r-pkg.org/badges/grand-total/parsel?color)
+[![Lifecycle:Stable](https://img.shields.io/badge/Lifecycle-Stable-97ca00)](<Redirect-URL>)
 <!-- badges: end -->
 
 `parsel` is a framework for parallelized dynamic web-scraping using
