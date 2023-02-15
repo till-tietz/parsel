@@ -27,6 +27,10 @@
     rlang::fn_fmls(base::get(f_rhs_name, envir = as.environment("package:parsel")))
     )
 
+  if(!"prev" %in% names(all_args_rhs)) {
+    stop(paste("cannot pipe into", f_rhs_name, "as it does not have a 'prev' argument.", sep = " "))
+  }
+
   all_args_rhs <- all_args_rhs[-which(names(all_args_rhs) == "prev")]
 
   call_rhs <- call_rhs[-1]
