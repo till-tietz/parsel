@@ -86,11 +86,11 @@ build_scraper <- function(prev = NULL) {
       prev <- gsub("\\$\\$PARSELFUNCTIONCALLSTART\\$\\$","",prev)
       prev <- gsub("\\$\\$PARSELFUNCTIONCALLEND\\$\\$","",prev)
 
-      call <- trimws(sub("^[^<-]*<-", "", prev)) %>%
-        paste(., "}", sep = "\n")
+      call <- paste(trimws(sub("^[^<-]*<-", "", prev)), "}", sep = "\n")
       name <- trimws(sub("<-.*", "", prev))
 
       assign(name, eval(parse(text = call)), envir=globalenv())
+      print(paste("scraping function", name, "constructed and in environment", sep = " "))
     }
   } else {
     stop("no function to build")

@@ -14,8 +14,6 @@
 #'
 #' }
 
-
-
 `%>>%` <- function(lhs,rhs){
 
   call_rhs <- as.list(substitute(rhs))
