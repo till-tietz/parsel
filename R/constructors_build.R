@@ -92,7 +92,9 @@ build_scraper <- function(prev = NULL) {
       call <- paste(trimws(sub("^[^<-]*<-", "", prev)), "}", sep = "\n")
       name <- trimws(sub("<-.*", "", prev))
 
-      assign(name, eval(parse(text = call)), envir=globalenv())
+      pos <- 1
+      envir <- as.environment(pos)
+      assign(name, eval(parse(text = call)), envir = envir)
       print(paste("scraping function", name, "constructed and in environment", sep = " "))
     }
   } else {

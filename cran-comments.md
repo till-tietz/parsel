@@ -6,17 +6,12 @@ This is a minor release introducing the new constructor functions `start_scraper
 * win-builder, R version 4.1.3
 * R-hub macOS (r-release)
 * R-hub Windows Server 2022 (r-release)
+* R-hub Fedora Linux GCC (r-devel)
+* R-hub Debian Linux GCC (r-release)
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
-
-Found the following assignments to the global environment: \
-File ‘parsel/R/constructors_build.R’: \
-assign(name, eval(parse(text = call)), envir = globalenv()) 
-  
-**Global assignment is essential for the `build_scraper` functionality. Users can 
-specify the object name to avoid overwriting existing objects.**
+0 errors ✔ | 0 warnings ✔ | 0 notes ✔
     
     
 
