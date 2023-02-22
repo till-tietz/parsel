@@ -2,6 +2,7 @@
 #'
 #' @param prev a placeholder for the output of functions being piped into show(). Defaults to NULL and should not be altered.
 #' @return None (invisible NULL)
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -28,6 +29,7 @@ show <- function(prev = NULL){
 #' @param args a character vector of function arguments
 #' @param name character string specifying the object name of the scraping function. If NULL defaults to 'scraper'
 #' @return a character string starting a function definition
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -63,6 +65,7 @@ start_scraper <- function(args, name = NULL) {
 #'
 #' @param prev a placeholder for the output of functions being piped into show(). Defaults to NULL and should not be altered.
 #' @return a function
+#' @export
 #'
 #' @examples
 #' \dontrun{

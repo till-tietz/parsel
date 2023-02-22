@@ -1,3 +1,9 @@
+# parsel 0.3.0
+
+* Added `start_scraper` and `build_scraper` functions, which jointly allow users to turn scraper functionality defined by `parsel` 
+constructors into scraping functions. Scraping code can now not only be dumped to the console via `show` but be returned to the 
+environment as a function. 
+
 # parsel 0.2.1
 
 * fixed `parscrape` row number mismatch bug in the construction of the unscraped data.frame when chunks contain different numbers of scrape elements. 
