@@ -158,6 +158,7 @@ library(parsel)
 
 # returning a scaper function 
 start_scraper(args = "x", name = "get_wiki_text") %>>%
+  go(url = "x") %>>% 
   click(using = "id", value = "'n-randompage'", name = "rand_art") %>>%
   get_element(using = "id", value = "'firstHeading'", name = "title") %>>%
   click(using = "xpath", value = "'/html/body/div[3]/div[3]/div[5]/div[1]/p[1]/a[1]'", name = "link") %>>%
