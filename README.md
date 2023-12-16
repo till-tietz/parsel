@@ -23,6 +23,8 @@ errors. `parsel` additionally provides convenient wrapper functions
 around `RSelenium` methods, that allow you to quickly generate safe
 scraping code with minimal coding on your end.
 
+You can find the `parsel` website [here](https://till-tietz.github.io/parsel/).
+
 ## Installation
 
 ``` r
