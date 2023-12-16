@@ -3,7 +3,8 @@ Package: parsel
 Title: Parallel Dynamic Web-Scraping Using 'RSelenium'
 Version: 0.3.0
 Authors@R: c(
-    person("Till", "Tietz", email = "ttietz2014@gmail.com", role = c("cre","aut")))
+    person("Till", "Tietz", email = "ttietz2014@gmail.com", role = c("cre","aut"),
+           comment = c(ORCID = "0000-0002-2916-9059")))
 Description: A system to increase the efficiency of dynamic web-scraping with 'RSelenium'
     by leveraging parallel processing. You provide a function wrapper for your 'RSelenium' 
     scraping routine with a set of inputs, and 'parsel' runs it in several browser instances. 
